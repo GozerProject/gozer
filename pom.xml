@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.gozer</groupId>
+    <artifactId>gozer</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>Gozer</name>
+
+    <scm>
+        <connection>scm:git:https://github.com/GozerProject/gozer.git</connection>
+        <developerConnection>scm:git:https://github.com/GozerProject/gozer.git</developerConnection>
+        <url>https://github.com/GozerProject/gozer.git</url>
+    </scm>
+
+    <properties>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <restx.version>0.2.8</restx.version>
+        <logback-classic.version>1.0.9</logback-classic.version>
+        <junit.version>4.11</junit.version>
+        <assertj.version>1.1.0</assertj.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>io.restx</groupId>
+            <artifactId>restx-core</artifactId>
+            <version>${restx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.restx</groupId>
+            <artifactId>restx-core-annotation-processor</artifactId>
+            <version>${restx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.restx</groupId>
+            <artifactId>restx-factory</artifactId>
+            <version>${restx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.restx</groupId>
+            <artifactId>restx-servlet</artifactId>
+            <version>${restx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.restx</groupId>
+            <artifactId>restx-server-jetty</artifactId>
+            <version>${restx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback-classic.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kevoree</groupId>
+            <artifactId>org.kevoree.maven.resolver</artifactId>
+            <version>1</version>
+        </dependency>
+        <dependency>
+            <groupId>io.restx</groupId>
+            <artifactId>restx-specs-tests</artifactId>
+            <version>${restx.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    
+</project>
