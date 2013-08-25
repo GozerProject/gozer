@@ -7,11 +7,28 @@ public class Project {
 
     private Dependencies dependencies;
 
+    public Project() {
+    }
+
+    public Project(Project project) {
+        this.id = project.getId();
+        this.name = project.getName();
+        this.dependencies = project.getDependencies();
+    }
+
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Dependencies getDependencies() {
+        return dependencies;
     }
 }
