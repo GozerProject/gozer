@@ -31,4 +31,12 @@ public class Project {
     public Dependencies getDependencies() {
         return dependencies;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDependencies(Dependencies dependencies) {
+        this.dependencies = dependencies;
+    }
 }

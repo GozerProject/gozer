@@ -5,9 +5,17 @@ import java.util.Set;
 
 public class Dependencies {
 
-    private Set<Dependency> dependencies;
+    private Set<Dependency> compile;
 
     public Dependencies() {
-        dependencies = new HashSet<Dependency>();
+        compile = new HashSet<Dependency>();
+    }
+
+    public Set<Dependency> getCompile() {
+        return compile;
+    }
+
+    public void setCompile(Set<Dependency> compile) {
+        this.compile = compile;
     }
 }
