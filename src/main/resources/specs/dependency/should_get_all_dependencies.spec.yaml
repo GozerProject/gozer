@@ -4,4 +4,4 @@ given:
 wts:
   - when: GET dependencies
     then: |
-      {"dependencies"}
+      []

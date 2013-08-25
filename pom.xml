@@ -43,11 +43,6 @@
         </dependency>
         <dependency>
             <groupId>io.restx</groupId>
-            <artifactId>restx-servlet</artifactId>
-            <version>${restx.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.restx</groupId>
             <artifactId>restx-server-jetty</artifactId>
             <version>${restx.version}</version>
         </dependency>

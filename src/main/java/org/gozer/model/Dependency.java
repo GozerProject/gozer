@@ -4,10 +4,30 @@ import com.google.common.base.Objects;
 
 public class Dependency {
 
+    private Long id;
     private String groupId;
     private String artifactId;
     private String version;
     private String packaging = "jar";
+
+    public Dependency() {
+    }
+
+    public Dependency(Dependency dependency) {
+        this.id = dependency.getId();
+        this.groupId = dependency.getGroupId();
+        this.artifactId = dependency.getArtifactId();
+        this.version = dependency.getVersion();
+        this.packaging = dependency.getPackaging();
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
 
     public String getGroupId() {
         return groupId;
@@ -31,6 +51,14 @@ public class Dependency {
 
     public void setVersion(String version) {
         this.version = version;
+    }
+
+    public String getPackaging() {
+        return packaging;
+    }
+
+    public void setPackaging(String packaging) {
+        this.packaging = packaging;
     }
 
     public String getMavenUrl() {

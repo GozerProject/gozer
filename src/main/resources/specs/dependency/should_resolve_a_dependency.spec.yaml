@@ -1,0 +1,7 @@
+title: should resolve a dependency
+given:
+  - time: 2013-03-31T14:33:18
+wts:
+  - when: GET dependencies/org.kevoree.log/org.kevoree.log/1/resolve
+    then: |
+      {"groupId":"org.kevoree.log","artifactId":"org.kevoree.log","version":"1","mavenUrl":"mvn:org.kevoree.log:org.kevoree.log:1:jar"}

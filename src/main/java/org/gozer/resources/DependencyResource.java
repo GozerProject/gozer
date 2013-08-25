@@ -1,7 +1,7 @@
 package org.gozer.resources;
 
-import org.gozer.model.Dependencies;
 import org.gozer.model.Dependency;
+import org.gozer.repositories.DependencyRepository;
 import org.gozer.services.DependenciesService;
 import restx.annotations.GET;
 import restx.annotations.POST;
@@ -9,26 +9,35 @@ import restx.annotations.RestxResource;
 import restx.factory.Component;
 import restx.security.PermitAll;
 
+import java.util.Set;
+
 import static org.gozer.builders.DependencyBuilder.aDependency;
 
 @Component
 @RestxResource
 public class DependencyResource {
+
+    private DependencyRepository dependencyRepository;
+
+    public DependencyResource(DependencyRepository dependencyRepository) {
+        this.dependencyRepository = dependencyRepository;
+    }
+
     @PermitAll
     @GET("/dependencies")
-    public String getAll() {
-        return "dependencies";
+    public Set<Dependency> getAll() {
+        return dependencyRepository.getAll();
     }
 
     @PermitAll
     @POST("/dependencies")
-    public String create(Dependencies dependencies) {
-        return "dependencies";
+    public Dependency create(Dependency dependency) {
+        return dependencyRepository.create(dependency);
     }
 
     @PermitAll
     @GET("/dependencies/{groupId}/{artifactId}/{version}/resolve")
-    public String resolve(String groupId, String artifactId, String version) {
+    public Dependency resolve(String groupId, String artifactId, String version) {
         DependenciesService dependenciesService = new DependenciesService();
 
         Dependency dependency = aDependency().withGroupId(groupId)
@@ -36,6 +45,6 @@ public class DependencyResource {
                                              .withVersion(version)
                                              .build();
         dependenciesService.resolve(dependency);
-        return "resolve";
+        return dependency;
     }
 }

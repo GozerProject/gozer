@@ -1,8 +1,0 @@
-title: should create a dependency
-given:
-  - time: 2013-03-31T14:33:18.272+02:00
-wts:
-  - when: POST dependencies
-          [{"groupId":"org.kevoree.log","artifactId":"org.kevoree.log","version":"1"}]
-    then: |
-      {"dependencies"}
