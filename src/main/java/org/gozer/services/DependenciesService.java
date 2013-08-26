@@ -2,10 +2,12 @@ package org.gozer.services;
 
 import org.gozer.model.Dependency;
 import org.kevoree.resolver.MavenResolver;
+import restx.factory.Component;
 
 import java.io.File;
 import java.util.Arrays;
 
+@Component
 public class DependenciesService {
 
     private static final String MAVEN_CENTRAL = "http://repo1.maven.org/maven2";
