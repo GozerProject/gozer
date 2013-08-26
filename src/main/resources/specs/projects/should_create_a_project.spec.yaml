@@ -4,6 +4,6 @@ given:
 wts:
   - when: POST projects
 
-          {"name":"Gozer","dependencies":{"compile":[{"groupId":"org.kevoree.log","artifactId":"org.kevoree.log","version":"1"}]}}
+          {"name":"gozer","dependencies":{"compile":[{"groupId":"org.kevoree.log","artifactId":"org.kevoree.log","version":"1"}]}}
     then: |
-      {"id":1,"name":"Gozer","dependencies":{"compile":[{"id":null,"groupId":"org.kevoree.log","artifactId":"org.kevoree.log","version":"1","packaging":"jar","mavenUrl":"mvn:org.kevoree.log:org.kevoree.log:1:jar"}]}}
+      {"id":1,"name":"gozer","dependencies":{"compile":[{"id":null,"groupId":"org.kevoree.log","artifactId":"org.kevoree.log","version":"1","packaging":"jar","mavenUrl":"mvn:org.kevoree.log:org.kevoree.log:1:jar"}]}}

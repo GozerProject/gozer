@@ -62,6 +62,11 @@
             <version>1</version>
         </dependency>
         <dependency>
+            <groupId>org.mapdb</groupId>
+            <artifactId>mapdb</artifactId>
+            <version>0.9.3</version>
+        </dependency>
+        <dependency>
             <groupId>io.restx</groupId>
             <artifactId>restx-specs-tests</artifactId>
             <version>${restx.version}</version>

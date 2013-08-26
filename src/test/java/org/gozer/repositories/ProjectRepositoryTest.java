@@ -1,13 +1,14 @@
 package org.gozer.repositories;
 
+import com.google.common.collect.ImmutableMap;
 import org.gozer.model.Project;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Set;
+import java.util.Collection;
 
-import static com.google.common.collect.Sets.newHashSet;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.gozer.builders.ProjectBuilder.aProject;
 
 public class ProjectRepositoryTest {
 
@@ -21,7 +22,7 @@ public class ProjectRepositoryTest {
     @Test
     public void getAll_should_return_a_empty_set() {
         ProjectRepository projectRepository = new ProjectRepository();
-        Set<Project> projects = projectRepository.getAll();
+        Collection<Project> projects = projectRepository.getAll();
         assertThat(projects).isNotNull().isEmpty();
     }
 
@@ -29,8 +30,8 @@ public class ProjectRepositoryTest {
     public void getAll_should_return_all_elements() {
         Project project1 = new Project();
         Project project2 = new Project();
-        projectRepository.setProjects(newHashSet(project1, project2));
-        Set<Project> projects = projectRepository.getAll();
+        projectRepository.setProjects(ImmutableMap.of(1L, project1, 2L, project2));
+        Collection<Project> projects = projectRepository.getAll();
         assertThat(projects).isNotNull().containsOnly(project1, project2);
     }
 
@@ -46,7 +47,7 @@ public class ProjectRepositoryTest {
         Project project = new Project();
         Project returnedProject = projectRepository.create(project);
         assertThat(returnedProject).isNotNull();
-        assertThat(projectRepository.getProjects()).contains(returnedProject);
+        assertThat(projectRepository.getProjects()).containsValue(returnedProject);
     }
 
     @Test
@@ -55,5 +56,18 @@ public class ProjectRepositoryTest {
         Project returnedProject = projectRepository.create(project);
         assertThat(returnedProject).isNotNull();
         assertThat(returnedProject.getId()).isEqualTo(1L);
+    }
+
+    @Test
+    public void findByName_should_get_a_Project_with_the_name() {
+        projectRepository.setProjects(ImmutableMap.of(1L, aProject().withName("name").build()));
+        Project returnedProject = projectRepository.findByName("name");
+        assertThat(returnedProject).isNotNull();
+        assertThat(returnedProject.getName()).isEqualTo("name");
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void findByName_should_have_null_parameter() {
+        projectRepository.findByName(null);
     }
 }

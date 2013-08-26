@@ -1,0 +1,7 @@
+title: should deploy a project
+given:
+  - time: 2013-03-31T14:33:18
+wts:
+  - when: PUT projects/gozer/deploy
+    then: |
+      []
