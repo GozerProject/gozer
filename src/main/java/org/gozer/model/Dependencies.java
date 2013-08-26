@@ -1,9 +1,10 @@
 package org.gozer.model;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Dependencies {
+public class Dependencies implements Serializable {
 
     private Set<Dependency> compile;
 

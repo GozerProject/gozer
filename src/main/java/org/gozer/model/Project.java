@@ -1,13 +1,21 @@
 package org.gozer.model;
 
-public class Project {
+import java.io.Serializable;
+
+public class Project implements Serializable {
+
+    public enum Status {
+        DEPLOYED;
+    }
+
 
     private Long id;
     private String name;
-
+    private Status status;
     private Dependencies dependencies;
 
     public Project() {
+        dependencies = new Dependencies();
     }
 
     public Project(Project project) {
@@ -38,5 +46,13 @@ public class Project {
 
     public void setDependencies(Dependencies dependencies) {
         this.dependencies = dependencies;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public Status getStatus() {
+        return status;
     }
 }

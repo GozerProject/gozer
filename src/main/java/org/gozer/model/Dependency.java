@@ -2,7 +2,9 @@ package org.gozer.model;
 
 import com.google.common.base.Objects;
 
-public class Dependency {
+import java.io.Serializable;
+
+public class Dependency implements Serializable {
 
     private Long id;
     private String groupId;
