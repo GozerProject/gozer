@@ -2,6 +2,12 @@ title: should deploy a project
 given:
   - time: 2013-03-31T14:33:18
 wts:
+  - when: POST projects
+
+            {"name":"gozer","dependencies":{"compile":[{"groupId":"org.kevoree.log","artifactId":"org.kevoree.log","version":"1"}]}}
+    then: |
+
+        {"id":1,"name":"gozer","dependencies":{"compile":[{"id":null,"groupId":"org.kevoree.log","artifactId":"org.kevoree.log","version":"1","packaging":"jar","mavenUrl":"mvn:org.kevoree.log:org.kevoree.log:1:jar"}]}}
   - when: PUT projects/gozer/deploy
     then: |
-      []
+      {"id":1,"name":"gozer","status":"DEPLOYED","dependencies":{"compile":[{"id":null,"groupId":"org.kevoree.log","artifactId":"org.kevoree.log","version":"1","packaging":"jar","mavenUrl":"mvn:org.kevoree.log:org.kevoree.log:1:jar"}]}}

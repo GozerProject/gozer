@@ -20,6 +20,7 @@ public class ProjectRepository {
 
     private Map<Long,Project> projects;
     private Long index;
+    private DB db;
 
     public ProjectRepository() {
         LOGGER.info("Created");
@@ -27,7 +28,7 @@ public class ProjectRepository {
 
         // configure and open database using builder pattern.
         // all options are available with code auto-completion.
-        DB db = DBMaker.newFileDB(new File("testdb"))
+        db = DBMaker.newFileDB(new File("testdb"))
                 .closeOnJvmShutdown()
 //                .encryptionEnable("password")
                 .make();
@@ -45,6 +46,7 @@ public class ProjectRepository {
         Project newProject = new Project(project);
         newProject.setId(++index);
         projects.put(newProject.getId(), newProject);
+        db.commit();
         return newProject;
     }
 

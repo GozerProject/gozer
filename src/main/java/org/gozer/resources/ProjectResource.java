@@ -13,6 +13,7 @@ import restx.security.PermitAll;
 
 import java.util.Collection;
 
+import static com.google.common.base.Preconditions.checkNotNull;
 import static org.gozer.model.Project.Status.DEPLOYED;
 
 @Component
@@ -44,6 +45,7 @@ public class ProjectResource {
     @PUT("/projects/{projectName}/deploy")
     public Project deploy(String projectName) {
 
+        checkNotNull(projectName);
         Project project = projectRepository.findByName(projectName);
         if (project == null) {
             return null;
