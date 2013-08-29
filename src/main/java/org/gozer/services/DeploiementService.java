@@ -2,33 +2,43 @@ package org.gozer.services;
 
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
+import org.gozer.model.Project;
+import restx.factory.Component;
 
 import java.io.File;
 import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 
+import static org.gozer.builders.ProjectBuilder.aProject;
+
+
+@Component
 public class DeploiementService {
 
+    private static final String WEB_XML_STANDARD_LOCATION = "src/main/webapp/WEB-INF/web.xml";
+    private static final String WEBAPP_STANDARD_LOCATION = "src/main/webapp";
+    private static final int DEFAULT_PORT = 8085;
+    private String globalRepoPath = "target/git";
 
-    public void deploy() throws Exception {
-        String WEB_INF_LOCATION = "target/git/spring-pet-clinic/src/main/webapp/WEB-INF/web.xml";
-        String WEB_APP_LOCATION = "target/git/spring-pet-clinic/src/main/webapp";
+    public DeploiementService(String globalRepoPath) {
+        this.globalRepoPath = globalRepoPath;
+    }
 
-
-//        WebServer server = new JettyWebServer(WEB_INF_LOCATION, WEB_APP_LOCATION, 8085, "0.0.0.0");
-//        server.startAndAwait();
-
-
-
+    public void deploy(Project project) {
+        String WEB_INF_LOCATION = globalRepoPath +"/"+ project.getName()+ "/" + WEB_XML_STANDARD_LOCATION;
+        String WEB_APP_LOCATION = globalRepoPath +"/"+ project.getName()+ "/" + WEBAPP_STANDARD_LOCATION;
 
             try {
-                Server server = new Server(8085);
+                Server server = new Server(DEFAULT_PORT);
                 WebAppContext handler = new WebAppContext();
                 handler.setResourceBase(WEB_APP_LOCATION);
-                handler.setContextPath("/appli");
+                handler.setContextPath("/"+project.getName());
+
+
+                // TODO create a method to build the classpath from project
                 FileSystem fileSystem = FileSystems.getDefault();
-                Path dependenciesRoot = fileSystem.getPath("target/git/spring-pet-clinic/target/dependency");
+                Path dependenciesRoot = fileSystem.getPath("");
                 File directory = dependenciesRoot.toFile();
 //                System.out.println("directory : "+directory.getAbsolutePath());
                 StringBuilder sb = new StringBuilder();
@@ -50,36 +60,13 @@ public class DeploiementService {
             }
     }
 
-//    public static void main(String[] args) throws Exception {
-//        Server server = new Server();
-//        SocketConnector connector = new SocketConnector();
-//
-//        // Set some timeout options to make debugging easier.
-//        connector.setMaxIdleTime(1000 * 60 * 60);
-//        connector.setSoLingerTime(-1);
-//        connector.setPort(8080);
-//        server.setConnectors(new Connector[] { connector });
-//
-//        WebAppContext context = new WebAppContext();
-//        context.setServer(server);
-//        context.setContextPath("/");
-//
-//        server.addHandler(context);
-//        try {
-//            server.start();
-//            System.in.read();
-//            server.stop();
-//            server.join();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            System.exit(100);
-//        }
-//    }
-
-
     public static void main(String[] args) throws Exception {
-        DeploiementService deploiementService = new DeploiementService();
-        deploiementService.deploy();
+
+        Project project = aProject().withName("spring-pet-clinic")
+                                    .withScm("https://github.com/SpringSource/spring-petclinic.git")
+                                    .build();
+        DeploiementService deploiementService = new DeploiementService("");
+        deploiementService.deploy(project);
     }
 
 }

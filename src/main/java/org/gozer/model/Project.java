@@ -1,8 +1,35 @@
 package org.gozer.model;
 
+import java.io.File;
 import java.io.Serializable;
+import java.util.Set;
 
 public class Project implements Serializable {
+    private Set<File> dependenciesPaths;
+
+//    private String classpath;
+
+    public String getClasspath() {
+
+        StringBuilder sb = new StringBuilder();
+        for (File file : dependenciesPaths) {
+//                    System.out.println("file : "+file.getAbsolutePath());
+            sb.append(file.getAbsolutePath()).append(";");
+        }
+
+//        handler.setExtraClasspath(sb.toString()+"target/tmp/classes;target/git/spring-pet-clinic/src/main/resources/");
+
+//
+//        StringBuilder sb = new StringBuilder();
+//        for (File file : directory.listFiles()) {
+//            sb.append(file.getAbsolutePath()).append(";");
+//        }
+//
+//        handler.setExtraClasspath(sb.toString()+"target/tmp/classes;target/git/spring-pet-clinic/src/main/resources/");
+
+
+        return "";
+    }
 
     public enum Status {
         DEPLOYED;

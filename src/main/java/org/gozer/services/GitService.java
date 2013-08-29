@@ -9,11 +9,15 @@ import java.io.IOException;
 
 public class GitService {
 
-    private static final String GLOBAL_REPO_PATH = "target/git";
+    private String globalRepoPath = "target/git";
+
+    public GitService(String globalRepoPath) {
+        this.globalRepoPath = globalRepoPath;
+    }
 
     public void cloneRepository(Project project) throws IOException, GitAPIException {
 
-        String localPath = GLOBAL_REPO_PATH + "/" + project.getName();
+        String localPath = globalRepoPath + "/" + project.getName();
         String remotePath = project.getScm();
 //        FileRepository localRepo = new FileRepository(localPath + "/.git");
 //        Git git = new Git(localRepo);
