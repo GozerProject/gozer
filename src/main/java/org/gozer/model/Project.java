@@ -6,15 +6,23 @@ import java.util.Set;
 
 public class Project implements Serializable {
     private Set<File> dependenciesPaths;
+    private String sourcePath;
 
     public Set<File> getDependenciesPaths() {
         return dependenciesPaths;
     }
 
-    public enum Status {
-        DEPLOYED;
+    public void setSourcePath(String sourcePath) {
+        this.sourcePath = sourcePath;
     }
 
+    public enum Status {
+        DEPLOYED, CLONED;
+    }
+
+    public String getSourcePath() {
+        return sourcePath;
+    }
 
     private Long id;
     private String name;

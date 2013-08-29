@@ -4,6 +4,7 @@ import org.gozer.model.Dependency;
 import org.gozer.model.Project;
 import org.gozer.repositories.ProjectRepository;
 import org.gozer.services.DependenciesService;
+import org.gozer.services.GitService;
 import restx.annotations.GET;
 import restx.annotations.POST;
 import restx.annotations.PUT;
@@ -22,10 +23,14 @@ public class ProjectResource {
 
     private DependenciesService dependenciesService;
     private ProjectRepository projectRepository;
+    private GitService gitService;
 
-    public ProjectResource(ProjectRepository projectRepository, DependenciesService dependenciesService) {
+    public ProjectResource(ProjectRepository projectRepository,
+                           DependenciesService dependenciesService,
+                           GitService gitService) {
         this.projectRepository = projectRepository;
         this.dependenciesService = dependenciesService;
+        this.gitService = gitService;
     }
 
 
@@ -54,6 +59,21 @@ public class ProjectResource {
             dependenciesService.resolve(dependency);
         }
         project.setStatus(DEPLOYED);
+        return project;
+    }
+
+    @PermitAll
+    @PUT("/projects/{projectName}/clone")
+    public Project clone(String projectName) {
+
+        checkNotNull(projectName);
+        Project project = projectRepository.findByName(projectName);
+        if (project == null) {
+            return null;
+        }
+
+        project = gitService.cloneRepository(project);
+
         return project;
     }
 

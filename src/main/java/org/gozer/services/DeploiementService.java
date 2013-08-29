@@ -15,6 +15,8 @@ import java.io.File;
 @Component
 public class DeploiementService {
 
+
+    // TODO put everything into injected configuration
     private static final Logger LOGGER = LoggerFactory.getLogger(DeploiementService.class);
     private static final String WEB_XML_STANDARD_LOCATION = "src/main/webapp/WEB-INF/web.xml";
     private static final String WEBAPP_STANDARD_LOCATION = "src/main/webapp";

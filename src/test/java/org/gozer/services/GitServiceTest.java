@@ -10,6 +10,7 @@ import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.gozer.builders.ProjectBuilder.aProject;
+import static org.gozer.model.Project.Status.CLONED;
 
 public class GitServiceTest {
 
@@ -20,9 +21,12 @@ public class GitServiceTest {
                 .build();
 
         GitService gitService = new GitService("target/git");
-        gitService.cloneRepository(project);
+        Project returnedProject = gitService.cloneRepository(project);
 
         assertThat(new File("target/git/spring-pet-clinic")).exists();
+        assertThat(returnedProject).isNotNull();
+        assertThat(returnedProject.getStatus()).isEqualTo(CLONED);
+        assertThat(returnedProject.getSourcePath()).isEqualTo("target/git/spring-pet-clinic");
     }
 
     @After
