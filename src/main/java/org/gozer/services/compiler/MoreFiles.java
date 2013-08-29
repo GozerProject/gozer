@@ -16,6 +16,22 @@ public class MoreFiles {
             return input.toFile();
         }
     };
+
+    public static final Function<? super Path, String> pathToFileAsString = new Function<Path, String>() {
+        @Override
+        public String apply(Path input) {
+            File directory = input.toFile();
+            System.out.println("directory : "+directory.getAbsolutePath());
+            StringBuilder sb = new StringBuilder();
+            for (File file : directory.listFiles()) {
+                System.out.println("file : "+file.getAbsolutePath());
+                sb.append(file.getAbsolutePath()).append(":");
+            }
+
+            return sb.toString();
+        }
+    };
+
     public static final Function<String, Path> strToPath = new Function<String, Path>() {
         @Override
         public Path apply(String input) {

@@ -60,7 +60,7 @@ public class CompilationService {
     private final boolean useLastModifiedTocheckChanges = true;
     private Collection<Diagnostic<?>> lastDiagnostics = new CopyOnWriteArrayList<>();
 
-    public CompilationService(EventBus eventBus, Iterable<Path> sourceRoots, Path destination) {
+    public CompilationService(EventBus eventBus, Iterable<Path> sourceRoots, Path destination, List<File> dependencies) {
         this.eventBus = eventBus;
         this.sourceRoots = sourceRoots;
         this.destination = destination;
@@ -74,6 +74,7 @@ public class CompilationService {
 
             fileManager.setLocation(StandardLocation.SOURCE_PATH, transform(sourceRoots, MoreFiles.pathToFile));
             fileManager.setLocation(StandardLocation.CLASS_OUTPUT, singleton(destination.toFile()));
+            fileManager.setLocation(StandardLocation.CLASS_PATH, dependencies);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -358,6 +359,22 @@ public class CompilationService {
                 logger.debug("compilation finished: up to date");
                 return;
             }
+
+            // TODO ajout du classpath des dependences
+
+            List<String> optionList = new ArrayList<>();
+            FileSystem fileSystem = FileSystems.getDefault();
+            Path dependenciesRoot = fileSystem.getPath("target/git/spring-pet-clinic/target/dependency");
+            List<Path> dependenciesRoots = asList(dependenciesRoot);
+
+            String classpath=System.getProperty("java.class.path");
+            logger.info("classpath : {}", classpath);
+
+//            optionList = Arrays.asList("-classpath", "/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/spring-context-3.2.4.RELEASE.jar");
+//            optionList.addAll(Arrays.asList("-classpath", classpath+":/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/hibernate-core-4.2.1.Final.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/jdom-1.0.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/joda-time-jsptags-1.1.1.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/bootstrap-2.3.0.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/hamcrest-core-1.3.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/FastInfoset-1.2.12.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/spring-core-3.2.4.RELEASE.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/istack-commons-runtime-2.16.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/validation-api-1.0.0.GA.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/logback-classic-1.0.13.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/spring-jdbc-3.2.4.RELEASE.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/itextpdf-5.3.4.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/spring-webmvc-3.2.4.RELEASE.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/datatables-core-0.8.14.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/aopalliance-1.0.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/spring-orm-3.2.4.RELEASE.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/spring-tx-3.2.4.RELEASE.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/spring-data-jpa-1.3.4.RELEASE.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/ehcache-core-2.6.6.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/hsqldb-2.3.0.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/slf4j-api-1.7.5.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/commons-beanutils-1.8.3.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/spring-context-support-3.2.4.RELEASE.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/spring-aop-3.2.4.RELEASE.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/hibernate-ehcache-4.2.1.Final.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/dom4j-1.6.1.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/json-simple-1.1.1.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/usertype.spi-3.1.0.CR8.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/jsp-api-2.2.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/spring-expression-3.2.4.RELEASE.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/spring-beans-3.2.4.RELEASE.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/jstl-1.2.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/jquery-1.9.0.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/logback-core-1.0.13.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/datatables-servlet2-0.8.14.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/jcl-over-slf4j-1.7.1.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/spring-jms-3.2.4.RELEASE.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/spring-test-3.2.4.RELEASE.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/spring-oxm-3.2.4.RELEASE.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/antlr-2.7.7.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/tomcat-juli-7.0.42.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/datatables-jsp-0.8.14.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/javassist-3.15.0-GA.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/hamcrest-library-1.3.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/hibernate-jpa-2.0-api-1.0.1.Final.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/jaxb-api-2.2.7.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/jsr173_api-1.0.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/spring-context-3.2.4.RELEASE.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/hibernate-entitymanager-4.2.1.Final.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/usertype.core-3.1.0.CR8.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/joda-time-hibernate-1.3.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/hibernate-commons-annotations-4.0.1.Final.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/junit-4.11.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/commons-lang-2.6.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/logback-access-1.0.9.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/servlet-api-2.5.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/jboss-logging-3.1.0.GA.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/aspectjrt-1.7.3.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/datatables-export-itext-0.8.14.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/jaxb-impl-2.2.7.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/rome-1.0.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/jaxb-core-2.2.7.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/spring-data-commons-1.5.2.RELEASE.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/tomcat-jdbc-7.0.42.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/spring-web-3.2.4.RELEASE.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/hibernate-validator-4.3.1.Final.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/jboss-transaction-api_1.1_spec-1.0.1.Final.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/joda-time-2.3.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/aspectjweaver-1.7.3.jar:/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/jquery-ui-1.9.2.jar"));
+//            optionList.addAll(Arrays.asList("-classpath", transform(dependenciesRoots, MoreFiles.pathToFileAsString).toString()));
+//            logger.info("options : {}", optionList.get(1));
+
             JavaCompiler.CompilationTask compilationTask = javaCompiler.getTask(
                     null, fileManager, diagnostics, null, null, javaFileObjects);
 
@@ -550,12 +567,13 @@ public class CompilationService {
     public static void main(String[] args) {
 
         FileSystem fileSystem = FileSystems.getDefault();
-        Path testSourceRoot = fileSystem.getPath("target/git/src/main/java");
-        Path sourceRoot = fileSystem.getPath("target/git/src/main/java");
+        Path sourceRoot = fileSystem.getPath("target/git/spring-pet-clinic/src/main/java");
         Path destination = fileSystem.getPath("target/tmp/classes");
+        Path dependenciesRoot = fileSystem.getPath("target/git/spring-pet-clinic/target/dependency");
+        List<File> dependencies = Arrays.asList(dependenciesRoot.toFile().listFiles());
         List<Path> sourceRoots = asList(sourceRoot);
         EventBus eventBus = new EventBus();
-        CompilationService compilationService = new CompilationService(eventBus, sourceRoots, destination);
+        CompilationService compilationService = new CompilationService(eventBus, sourceRoots, destination, dependencies);
         compilationService.rebuild();
     }
 

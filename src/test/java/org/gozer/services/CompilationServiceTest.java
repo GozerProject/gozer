@@ -13,6 +13,7 @@ import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
@@ -27,6 +28,8 @@ public class CompilationServiceTest {
     Path destination = fileSystem.getPath("target/tmp/classes");
     EventBus eventBus = new EventBus();
     Collection<CompilationFinishedEvent> events = new ArrayList<>();
+    Path dependenciesRoot = fileSystem.getPath("target/git/spring-pet-clinic/target/dependency");
+    List<File> dependencies = Arrays.asList(dependenciesRoot.toFile().listFiles());
 
     @Before
     public void setup() {
@@ -39,9 +42,24 @@ public class CompilationServiceTest {
         });
     }
 
+//    @Test
+//    public void test() throws IOException {
+//        File[] files = new File[] {new File("org/gozer/SimpleCal")};
+//        String classpath=System.getProperty("java.class.path");
+//        JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
+//        List<String> optionList = new ArrayList<String>();
+//        optionList.addAll(Arrays.asList("-classpath", "/home/sebastien/workspace/gozer/target/git/spring-pet-clinic/target/dependency/spring-context-3.2.4.RELEASE.jar"));
+////      optionList.addAll(Arrays.asList("-d",rootPath+"/target"));
+//        StandardJavaFileManager sjfm = compiler.getStandardFileManager(null, null, null);
+//        Iterable fileObjects = sjfm.getJavaFileObjects(files);
+//        JavaCompiler.CompilationTask task = compiler.getTask(null, null, null,optionList,null,fileObjects);
+//        task.call();
+//        sjfm.close();
+//    }
+
     @Test
     public void should_rebuild_build() throws Exception {
-        CompilationService compilationManager = new CompilationService(eventBus, sourceRoots, destination);
+        CompilationService compilationManager = new CompilationService(eventBus, sourceRoots, destination,dependencies);
 
         assertThat(compilationManager.getClassFile("org.gozer.SimpleClass").isPresent()).isFalse();
 
@@ -57,7 +75,7 @@ public class CompilationServiceTest {
 
     @Test
     public void should_incremental_build() throws Exception {
-        CompilationService compilationManager = new CompilationService(eventBus, sourceRoots, destination);
+        CompilationService compilationManager = new CompilationService(eventBus, sourceRoots, destination,dependencies);
 
         assertThat(compilationManager.getClassFile("org.gozer.SimpleClass").isPresent()).isFalse();
 
