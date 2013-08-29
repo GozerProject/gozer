@@ -12,6 +12,7 @@ public class Project implements Serializable {
     private Long id;
     private String name;
     private Status status;
+    private String scm;
     private Dependencies dependencies;
 
     public Project() {
@@ -34,6 +35,14 @@ public class Project implements Serializable {
 
     public String getName() {
         return name;
+    }
+
+    public String getScm() {
+        return scm;
+    }
+
+    public void setScm(String scm) {
+        this.scm = scm;
     }
 
     public Dependencies getDependencies() {

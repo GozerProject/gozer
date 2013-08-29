@@ -6,6 +6,8 @@ import org.gozer.model.Project;
 public class ProjectBuilder {
     private Long id;
     private String name;
+    private Project.Status status;
+    private String scm;
     private Dependencies dependencies;
 
     private ProjectBuilder() {
@@ -25,6 +27,16 @@ public class ProjectBuilder {
         return this;
     }
 
+    public ProjectBuilder withStatus(Project.Status status) {
+        this.status = status;
+        return this;
+    }
+
+    public ProjectBuilder withScm(String scm) {
+        this.scm = scm;
+        return this;
+    }
+
     public ProjectBuilder withDependencies(Dependencies dependencies) {
         this.dependencies = dependencies;
         return this;
@@ -34,6 +46,8 @@ public class ProjectBuilder {
         Project project = new Project();
         project.setId(id);
         project.setName(name);
+        project.setStatus(status);
+        project.setScm(scm);
         project.setDependencies(dependencies);
         return project;
     }
