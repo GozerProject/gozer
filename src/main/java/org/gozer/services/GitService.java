@@ -12,12 +12,14 @@ public class GitService {
 
     public void cloneRepository() throws IOException, GitAPIException {
 
-        String localPath = "target/git";
-        String remotePath = "https://github.com/GozerProject/gozer.git";
+        String localPath = "target/git/spring-pet-clinic";
+        String remotePath = "https://github.com/SpringSource/spring-petclinic.git";
         FileRepository localRepo = new FileRepository(localPath + "/.git");
         Git git = new Git(localRepo);
 
-        Repository newRepo = new FileRepository(localPath + ".git");
+
+        // TODO sert à quelque chose dans le cas d'un clone ?
+        Repository newRepo = new FileRepository(localPath + "/.git");
         newRepo.create();
 
         Git.cloneRepository()
