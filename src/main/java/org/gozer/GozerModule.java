@@ -23,4 +23,9 @@ public class GozerModule {
     public String dependenciesRepository() {
         return System.getProperty("dependencies.repositories", "target/repository");
     }
+
+    @Provides @Named(GozerFactory.COMPILATION_DESTINATION)
+    public String compilationDestination() {
+        return System.getProperty("compilation.destination", "target/tmp/classes");
+    }
 }
