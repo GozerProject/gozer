@@ -1,6 +1,7 @@
 package org.gozer.services;
 
 import org.assertj.core.util.Files;
+import org.gozer.model.Project;
 import org.gozer.services.compiler.CompilationFinishedEvent;
 import org.junit.Before;
 import org.junit.Test;
@@ -35,12 +36,12 @@ public class CompilationServiceTest {
 
     @Test
     public void should_build() throws Exception {
-        CompilationService compilationManager = new CompilationService(sourceRoots, destination,dependencies);
+        CompilationService compilationManager = new CompilationService("/target/tmp/classes");
 
         assertThat(compilationManager.getClassFile("org.gozer.SimpleClass").isPresent()).isFalse();
 
         prepareSource("org/gozer/SimpleClass.java");
-        compilationManager.build();
+        compilationManager.build(new Project());
         assertThat(compilationManager.getClassFile("org.gozer.SimpleClass").isPresent()).isTrue();
 
     }

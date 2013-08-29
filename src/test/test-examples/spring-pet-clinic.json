@@ -1,0 +1,99 @@
+{
+    "name" : "spring-pet-clinic",
+    "scm" : "https://github.com/SpringSource/spring-petclinic.git",
+    "dependencies" : {
+        "compile" : [
+            {
+                "groupId" : "org.hibernate",
+                "artifactId" : "hibernate-core",
+                "version" : "4.2.1.Final"
+            },{
+                "groupId" : "org.hibernate",
+                "artifactId" : "jdom",
+                "version" : "1.0"
+            },{
+                "groupId" : "org.hibernate",
+                "artifactId" : "joda-time-jsptags",
+                "version" : "1.1.1"
+            },{
+                "groupId" : "org.hibernate",
+                "artifactId" : "bootstrap",
+                "version" : "2.3.0"
+            },{
+                "groupId" : "org.hibernate",
+                "artifactId" : "hamcrest-core",
+                "version" : "1.3"
+            },
+jdom-1.0.jar
+joda-time-jsptags-1.1.1.jar
+bootstrap-2.3.0.jar
+hamcrest-core-1.3.jar
+FastInfoset-1.2.12.jar
+spring-core-3.2.4.RELEASE.jar
+istack-commons-runtime-2.16.jar
+validation-api-1.0.0.GA.jar
+logback-classic-1.0.13.jar
+spring-jdbc-3.2.4.RELEASE.jar
+itextpdf-5.3.4.jar
+spring-webmvc-3.2.4.RELEASE.jar
+datatables-core-0.8.14.jar
+aopalliance-1.0.jar
+spring-orm-3.2.4.RELEASE.jar
+spring-tx-3.2.4.RELEASE.jar
+spring-data-jpa-1.3.4.RELEASE.jar
+ehcache-core-2.6.6.jar
+hsqldb-2.3.0.jar
+slf4j-api-1.7.5.jar
+commons-beanutils-1.8.3.jar
+spring-context-support-3.2.4.RELEASE.jar
+spring-aop-3.2.4.RELEASE.jar
+hibernate-ehcache-4.2.1.Final.jar
+dom4j-1.6.1.jar
+json-simple-1.1.1.jar
+usertype.spi-3.1.0.CR8.jar
+jsp-api-2.2.jar
+spring-expression-3.2.4.RELEASE.jar
+spring-beans-3.2.4.RELEASE.jar
+jstl-1.2.jar
+jquery-1.9.0.jar
+logback-core-1.0.13.jar
+datatables-servlet2-0.8.14.jar
+jcl-over-slf4j-1.7.1.jar
+spring-jms-3.2.4.RELEASE.jar
+spring-test-3.2.4.RELEASE.jar
+spring-oxm-3.2.4.RELEASE.jar
+antlr-2.7.7.jar
+tomcat-juli-7.0.42.jar
+datatables-jsp-0.8.14.jar
+javassist-3.15.0-GA.jar
+hamcrest-library-1.3.jar
+hibernate-jpa-2.0-api-1.0.1.Final.jar
+jaxb-api-2.2.7.jar
+jsr173_api-1.0.jar
+spring-context-3.2.4.RELEASE.jar
+hibernate-entitymanager-4.2.1.Final.jar
+usertype.core-3.1.0.CR8.jar
+joda-time-hibernate-1.3.jar
+hibernate-commons-annotations-4.0.1.Final.jar
+junit-4.11.jar
+commons-lang-2.6.jar
+logback-access-1.0.9.jar
+servlet-api-2.5.jar
+jboss-logging-3.1.0.GA.jar
+aspectjrt-1.7.3.jar
+datatables-export-itext-0.8.14.jar
+jaxb-impl-2.2.7.jar
+rome-1.0.jar
+jaxb-core-2.2.7.jar
+spring-data-commons-1.5.2.RELEASE.jar
+tomcat-jdbc-7.0.42.jar
+spring-web-3.2.4.RELEASE.jar
+hibernate-validator-4.3.1.Final.jar
+jboss-transaction-api_1.1_spec-1.0.1.Final.jar
+joda-time-2.3.jar
+aspectjweaver-1.7.3.jar
+jquery-ui-1.9.2.jar
+        ]
+    }
+
+}

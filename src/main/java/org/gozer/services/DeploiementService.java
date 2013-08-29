@@ -30,7 +30,7 @@ public class DeploiementService {
         this.classesPath = classesPath;
     }
 
-    public void deploy(Project project) {
+    public Project deploy(Project project) {
         String WEB_INF_LOCATION = globalRepoPath +"/"+ project.getName()+ "/" + WEB_XML_STANDARD_LOCATION;
         String WEB_APP_LOCATION = globalRepoPath +"/"+ project.getName()+ "/" + WEBAPP_STANDARD_LOCATION;
 
@@ -47,6 +47,8 @@ public class DeploiementService {
             } catch (Exception ex) {
                 LOGGER.error("Error :",ex);
             }
+        project.setStatus(Project.Status.DEPLOYED);
+        return project;
     }
 
     public String buildDeploymentClasspath(Project project) {

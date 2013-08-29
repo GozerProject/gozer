@@ -44,7 +44,7 @@ public class GitService {
             LOGGER.error("Error during cloning the repository", e);
         }
 
-        project.setSourcePath(localPath);
+        project.setPath(localPath);
         project.setStatus(CLONED);
 
         return project;

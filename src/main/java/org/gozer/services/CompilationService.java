@@ -3,10 +3,13 @@ package org.gozer.services;
 import com.google.common.base.Charsets;
 import com.google.common.base.Optional;
 import com.google.common.base.Stopwatch;
+import org.gozer.GozerFactory;
+import org.gozer.model.Project;
 import org.gozer.services.compiler.MoreFiles;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.inject.Named;
 import javax.tools.*;
 import java.io.File;
 import java.io.IOException;
@@ -20,6 +23,7 @@ import static com.google.common.collect.Iterables.transform;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singleton;
 import static java.util.Collections.unmodifiableCollection;
+import static org.gozer.builders.ProjectBuilder.aProject;
 
 public class CompilationService {
 
@@ -27,7 +31,7 @@ public class CompilationService {
 
     private final JavaCompiler javaCompiler;
 
-    private final Iterable<Path> sourceRoots;
+//    private final Iterable<Path> sourceRoots;
     private final Path destination;
 
     private final StandardJavaFileManager fileManager;
@@ -42,32 +46,17 @@ public class CompilationService {
     private final long compilationTimeout = 60; // in seconds
     private Collection<Diagnostic<?>> lastDiagnostics = new CopyOnWriteArrayList<>();
 
-    public CompilationService(Iterable<Path> sourceRoots, Path destination, List<File> dependencies) {
-        this.sourceRoots = sourceRoots;
-        this.destination = destination;
+    public CompilationService(@Named(GozerFactory.COMPILATION_DESTINATION) String compilationDestination) {
+        FileSystem fileSystem = FileSystems.getDefault();
+        destination = fileSystem.getPath(compilationDestination);
 
         javaCompiler = ToolProvider.getSystemJavaCompiler();
         fileManager = javaCompiler.getStandardFileManager(new DiagnosticCollector<JavaFileObject>(), Locale.ENGLISH, Charsets.UTF_8);
-        try {
-            if (!destination.toFile().exists()) {
-                destination.toFile().mkdirs();
-            }
-
-            fileManager.setLocation(StandardLocation.SOURCE_PATH, transform(sourceRoots, MoreFiles.pathToFile));
-            fileManager.setLocation(StandardLocation.CLASS_OUTPUT, singleton(destination.toFile()));
-            fileManager.setLocation(StandardLocation.CLASS_PATH, dependencies);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
 
     }
 
     public Path getDestination() {
         return destination;
-    }
-
-    public Iterable<Path> getSourceRoots() {
-        return sourceRoots;
     }
 
     private void copyResource(final Path dir, final Path resourcePath) {
@@ -112,7 +101,24 @@ public class CompilationService {
     /**
      * Clean destination and do a full build.
      */
-    public void build() {
+    public Project build(Project project) {
+
+        Set<File> dependencies = project.getDependenciesPaths();
+        final List<Path> sourceRoots = project.getSourcePaths();
+
+         try {
+            if (!destination.toFile().exists()) {
+                destination.toFile().mkdirs();
+            }
+
+            fileManager.setLocation(StandardLocation.SOURCE_PATH, transform(sourceRoots, MoreFiles.pathToFile));
+            fileManager.setLocation(StandardLocation.CLASS_OUTPUT, singleton(destination.toFile()));
+            fileManager.setLocation(StandardLocation.CLASS_PATH, dependencies);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+
         try {
             Exception e = compileExecutor.submit(new Callable<Exception>() {
                 @Override
@@ -148,6 +154,9 @@ public class CompilationService {
             }).get(compilationTimeout, TimeUnit.SECONDS);
             if (e != null) {
                 throw new RuntimeException(e);
+            } else {
+                project.setStatus(Project.Status.COMPILED);
+                return project;
             }
         } catch (InterruptedException | ExecutionException | TimeoutException e) {
             throw new RuntimeException(e);
@@ -242,14 +251,21 @@ public class CompilationService {
 
     public static void main(String[] args) {
 
+        Project project = aProject().withName("spring-pet-clinic")
+                .withScm("https://github.com/SpringSource/spring-petclinic.git")
+                .build();
+
         FileSystem fileSystem = FileSystems.getDefault();
         Path sourceRoot = fileSystem.getPath("target/git/spring-pet-clinic/src/main/java");
-        Path destination = fileSystem.getPath("target/tmp/classes");
         Path dependenciesRoot = fileSystem.getPath("target/git/spring-pet-clinic/target/dependency");
+//        for (File file : dependenciesRoot.toFile().listFiles()) {
+//            System.out.println(file.getName());
+//        }
+
         List<File> dependencies = Arrays.asList(dependenciesRoot.toFile().listFiles());
         List<Path> sourceRoots = asList(sourceRoot);
-        CompilationService compilationService = new CompilationService(sourceRoots, destination, dependencies);
-        compilationService.build();
+        CompilationService compilationService = new CompilationService("target/tmp/classes");
+        compilationService.build(project);
     }
 
 }

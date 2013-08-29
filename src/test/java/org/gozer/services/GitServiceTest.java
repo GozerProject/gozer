@@ -26,7 +26,7 @@ public class GitServiceTest {
         assertThat(new File("target/git/spring-pet-clinic")).exists();
         assertThat(returnedProject).isNotNull();
         assertThat(returnedProject.getStatus()).isEqualTo(CLONED);
-        assertThat(returnedProject.getSourcePath()).isEqualTo("target/git/spring-pet-clinic");
+        assertThat(returnedProject.getPath()).isEqualTo("target/git/spring-pet-clinic");
     }
 
     @After

@@ -1,17 +1,14 @@
 package org.gozer.services;
 
 import org.gozer.GozerFactory;
-import org.gozer.model.Dependencies;
 import org.gozer.model.Dependency;
+import org.gozer.model.Project;
 import org.kevoree.resolver.MavenResolver;
 import restx.factory.Component;
 
 import javax.inject.Named;
 import java.io.File;
 import java.util.Arrays;
-import java.util.Set;
-
-import static com.google.common.collect.Sets.newHashSet;
 
 @Component
 public class DependenciesService {
@@ -28,14 +25,14 @@ public class DependenciesService {
         return resolver.resolve(dependency.getMavenUrl(), Arrays.asList(MAVEN_CENTRAL));
     }
 
-    public Set<File> resolve(Dependencies dependencies) {
-        Set<File> files = newHashSet();
-
-        for (Dependency dependency : dependencies.getCompile()) {
-            files.add(resolve(dependency));
+    public Project resolve(Project project) {
+        for (Dependency dependency : project.getDependencies().getCompile()) {
+            project.addDependenciesPath(resolve(dependency));
         }
 
-        return files;
+        project.setStatus(Project.Status.RESOLVED);
+
+        return project;
     }
 
 }

@@ -2,33 +2,26 @@ package org.gozer.model;
 
 import java.io.File;
 import java.io.Serializable;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 
 public class Project implements Serializable {
-    private Set<File> dependenciesPaths;
-    private String sourcePath;
-
-    public Set<File> getDependenciesPaths() {
-        return dependenciesPaths;
-    }
-
-    public void setSourcePath(String sourcePath) {
-        this.sourcePath = sourcePath;
-    }
-
     public enum Status {
-        DEPLOYED, CLONED;
-    }
+        DEPLOYED, CLONED, COMPILED, RESOLVED;
 
-    public String getSourcePath() {
-        return sourcePath;
     }
-
     private Long id;
+
     private String name;
     private Status status;
     private String scm;
     private Dependencies dependencies;
+    private Set<File> dependenciesPaths;
+    private String path;
 
     public Project() {
         dependencies = new Dependencies();
@@ -46,6 +39,10 @@ public class Project implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getPath() {
+        return path;
     }
 
     public String getName() {
@@ -78,5 +75,24 @@ public class Project implements Serializable {
 
     public Status getStatus() {
         return status;
+    }
+
+    public Set<File> getDependenciesPaths() {
+        return dependenciesPaths;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public List<Path> getSourcePaths() {
+        FileSystem fileSystem = FileSystems.getDefault();
+        Path sourceRoot = fileSystem.getPath(path+"/src/main/java");
+
+        return Arrays.asList(sourceRoot);
+    }
+
+    public void addDependenciesPath(File dependencyPath) {
+        dependenciesPaths.add(dependencyPath);
     }
 }
