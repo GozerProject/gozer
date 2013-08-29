@@ -17,7 +17,6 @@ import static com.google.common.collect.Sets.newHashSet;
 public class DependenciesService {
 
     private static final String MAVEN_CENTRAL = "http://repo1.maven.org/maven2";
-    private static final String TARGET_REPOSITORY = "target/repository";
     private final MavenResolver resolver;
 
     public DependenciesService(@Named(GozerFactory.DEPENDENCIES_REPOSITORY) String dependenciesRepository) {

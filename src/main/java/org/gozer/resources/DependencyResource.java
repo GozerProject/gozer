@@ -17,10 +17,12 @@ import static org.gozer.builders.DependencyBuilder.aDependency;
 @RestxResource
 public class DependencyResource {
 
+    private DependenciesService dependenciesService;
     private DependencyRepository dependencyRepository;
 
-    public DependencyResource(DependencyRepository dependencyRepository) {
+    public DependencyResource(DependencyRepository dependencyRepository, DependenciesService dependenciesService) {
         this.dependencyRepository = dependencyRepository;
+        this.dependenciesService = dependenciesService;
     }
 
     @PermitAll
@@ -38,8 +40,6 @@ public class DependencyResource {
     @PermitAll
     @GET("/dependencies/{groupId}/{artifactId}/{version}/resolve")
     public Dependency resolve(String groupId, String artifactId, String version) {
-        DependenciesService dependenciesService = new DependenciesService();
-
         Dependency dependency = aDependency().withGroupId(groupId)
                                              .withArtifactId(artifactId)
                                              .withVersion(version)
