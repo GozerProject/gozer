@@ -18,4 +18,9 @@ public class GozerModule {
     public String globalRepoPath() {
         return System.getProperty("global.repo.path", "target/git");
     }
+
+    @Provides @Named(GozerFactory.DEPENDENCIES_REPOSITORY)
+    public String dependenciesRepository() {
+        return System.getProperty("dependencies.repositories", "target/repository");
+    }
 }
