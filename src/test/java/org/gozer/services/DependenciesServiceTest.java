@@ -19,6 +19,7 @@ public class DependenciesServiceTest {
                                             .build();
         service.resolve(dependency);
 
-        assertThat(new File("target/repositories/org/apache/camel/camel-core/2.10.4/", "camel-core-2.10.4.jar").exists()).isTrue();
+        // TODO use an injected properties
+        assertThat(new File("target/repositories/org/apache/camel/camel-core/2.10.4/", "camel-core-2.10.4.jar")).exists();
     }
 }
