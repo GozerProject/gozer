@@ -13,14 +13,13 @@ import static org.gozer.builders.ProjectBuilder.aProject;
 
 public class GitServiceTest {
 
-
     @Test
     public void shouldCloneARepository() throws IOException, GitAPIException {
         Project project = aProject().withName("spring-pet-clinic")
                 .withScm("https://github.com/SpringSource/spring-petclinic.git")
                 .build();
 
-        GitService gitService = new GitService();
+        GitService gitService = new GitService("target/git");
         gitService.cloneRepository(project);
 
         assertThat(new File("target/git/spring-pet-clinic")).exists();

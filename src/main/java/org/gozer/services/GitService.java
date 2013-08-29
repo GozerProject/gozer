@@ -2,16 +2,20 @@ package org.gozer.services;
 
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
+import org.gozer.GozerFactory;
 import org.gozer.model.Project;
+import restx.factory.Component;
 
+import javax.inject.Named;
 import java.io.File;
 import java.io.IOException;
 
+@Component
 public class GitService {
 
-    private String globalRepoPath = "target/git";
+    private String globalRepoPath;
 
-    public GitService(String globalRepoPath) {
+    public GitService(@Named(GozerFactory.GLOBAL_REPO_PATH) String globalRepoPath) {
         this.globalRepoPath = globalRepoPath;
     }
 

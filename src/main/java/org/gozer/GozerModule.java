@@ -5,10 +5,17 @@ import restx.SignatureKey;
 import restx.factory.Module;
 import restx.factory.Provides;
 
+import javax.inject.Named;
+
 @Module
 public class GozerModule {
     @Provides
     public SignatureKey signatureKey() {
         return new SignatureKey("5341679063568601943 gozer e372a614-d7a5-477b-9e3f-40c182b9f34d".getBytes(Charsets.UTF_8));
+    }
+
+    @Provides @Named(GozerFactory.GLOBAL_REPO_PATH)
+    public String globalRepoPath() {
+        return System.getProperty("global.repo.path", "target/git");
     }
 }
