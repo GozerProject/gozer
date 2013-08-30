@@ -8,6 +8,7 @@ import org.gozer.model.Project;
 import org.gozer.services.compiler.MoreFiles;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import restx.factory.Component;
 
 import javax.inject.Named;
 import javax.tools.*;
@@ -25,6 +26,7 @@ import static java.util.Collections.singleton;
 import static java.util.Collections.unmodifiableCollection;
 import static org.gozer.builders.ProjectBuilder.aProject;
 
+@Component
 public class CompilationService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CompilationService.class);
