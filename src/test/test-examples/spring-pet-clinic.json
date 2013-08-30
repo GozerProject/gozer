@@ -8,91 +8,282 @@
                 "artifactId" : "hibernate-core",
                 "version" : "4.2.1.Final"
             },{
-                "groupId" : "org.hibernate",
+                "groupId" : "jdom",
                 "artifactId" : "jdom",
                 "version" : "1.0"
             },{
-                "groupId" : "org.hibernate",
+                "groupId" : "joda-time",
                 "artifactId" : "joda-time-jsptags",
                 "version" : "1.1.1"
             },{
-                "groupId" : "org.hibernate",
+                "groupId" : "org.webjars",
                 "artifactId" : "bootstrap",
                 "version" : "2.3.0"
             },{
-                "groupId" : "org.hibernate",
+                "groupId" : "org.hamcrest",
                 "artifactId" : "hamcrest-core",
                 "version" : "1.3"
-            },
-jdom-1.0.jar
-joda-time-jsptags-1.1.1.jar
-bootstrap-2.3.0.jar
-hamcrest-core-1.3.jar
-FastInfoset-1.2.12.jar
-spring-core-3.2.4.RELEASE.jar
-istack-commons-runtime-2.16.jar
-validation-api-1.0.0.GA.jar
-logback-classic-1.0.13.jar
-spring-jdbc-3.2.4.RELEASE.jar
-itextpdf-5.3.4.jar
-spring-webmvc-3.2.4.RELEASE.jar
-datatables-core-0.8.14.jar
-aopalliance-1.0.jar
-spring-orm-3.2.4.RELEASE.jar
-spring-tx-3.2.4.RELEASE.jar
-spring-data-jpa-1.3.4.RELEASE.jar
-ehcache-core-2.6.6.jar
-hsqldb-2.3.0.jar
-slf4j-api-1.7.5.jar
-commons-beanutils-1.8.3.jar
-spring-context-support-3.2.4.RELEASE.jar
-spring-aop-3.2.4.RELEASE.jar
-hibernate-ehcache-4.2.1.Final.jar
-dom4j-1.6.1.jar
-json-simple-1.1.1.jar
-usertype.spi-3.1.0.CR8.jar
-jsp-api-2.2.jar
-spring-expression-3.2.4.RELEASE.jar
-spring-beans-3.2.4.RELEASE.jar
-jstl-1.2.jar
-jquery-1.9.0.jar
-logback-core-1.0.13.jar
-datatables-servlet2-0.8.14.jar
-jcl-over-slf4j-1.7.1.jar
-spring-jms-3.2.4.RELEASE.jar
-spring-test-3.2.4.RELEASE.jar
-spring-oxm-3.2.4.RELEASE.jar
-antlr-2.7.7.jar
-tomcat-juli-7.0.42.jar
-datatables-jsp-0.8.14.jar
-javassist-3.15.0-GA.jar
-hamcrest-library-1.3.jar
-hibernate-jpa-2.0-api-1.0.1.Final.jar
-jaxb-api-2.2.7.jar
-jsr173_api-1.0.jar
-spring-context-3.2.4.RELEASE.jar
-hibernate-entitymanager-4.2.1.Final.jar
-usertype.core-3.1.0.CR8.jar
-joda-time-hibernate-1.3.jar
-hibernate-commons-annotations-4.0.1.Final.jar
-junit-4.11.jar
-commons-lang-2.6.jar
-logback-access-1.0.9.jar
-servlet-api-2.5.jar
-jboss-logging-3.1.0.GA.jar
-aspectjrt-1.7.3.jar
-datatables-export-itext-0.8.14.jar
-jaxb-impl-2.2.7.jar
-rome-1.0.jar
-jaxb-core-2.2.7.jar
-spring-data-commons-1.5.2.RELEASE.jar
-tomcat-jdbc-7.0.42.jar
-spring-web-3.2.4.RELEASE.jar
-hibernate-validator-4.3.1.Final.jar
-jboss-transaction-api_1.1_spec-1.0.1.Final.jar
-joda-time-2.3.jar
-aspectjweaver-1.7.3.jar
-jquery-ui-1.9.2.jar
+            },{
+                "groupId" : "com.sun.xml.fastinfoset",
+                "artifactId" : "FastInfoset",
+                "version" : "1.2.12"
+            },{
+                "groupId" : "org.springframework",
+                "artifactId" : "spring-core",
+                "version" : "3.2.4.RELEASE"
+            },{
+                "groupId" : "com.sun.istack",
+                "artifactId" : "istack-common-runtime",
+                "version" : "2.16"
+            },{
+                "groupId" : "javax.validation",
+                "artifactId" : "validation-api",
+                "version" : "1.0.0.GA"
+            },{
+                "groupId" : "ch.qos.logback",
+                "artifactId" : "logback-classic",
+                "version" : "1.0.13"
+            },{
+                "groupId" : "org.springframework",
+                "artifactId" : "spring-jdbc",
+                "version" : "3.2.4.RELEASE"
+            },{
+                "groupId" : "com.itextpdf",
+                "artifactId" : "itextpdf",
+                "version" : "5.3.4"
+            },{
+                "groupId" : "org.springframeworke",
+                "artifactId" : "spring-mvc",
+                "version" : "3.2.4.RELEASE"
+            },{
+                "groupId" : "com.github.dandelion",
+                "artifactId" : "datatables-core",
+                "version" : "0.8.14"
+            },{
+                "groupId" : "aopalliance",
+                "artifactId" : "aopalliance",
+                "version" : "1.0"
+            },{
+                "groupId" : "org.springframework",
+                "artifactId" : "spring-orm",
+                "version" : "3.2.4.RELEASE"
+            },{
+                "groupId" : "org.springframework",
+                "artifactId" : "spring-tx",
+                "version" : "3.2.4.RELEASE"
+            },{
+                "groupId" : "org.springframework",
+                "artifactId" : "spring-dta-jpa",
+                "version" : "1.3.4.RELEASE"
+            },{
+                "groupId" : "net.sf.ehcache",
+                "artifactId" : "ehcache-core",
+                "version" : "2.6.6"
+            },{
+                "groupId" : "hsqldb",
+                "artifactId" : "hsqldb",
+                "version" : "2.3.0"
+            },{
+                "groupId" : "org.slf4j",
+                "artifactId" : "slf4j-api",
+                "version" : "1.7.5"
+            },{
+                "groupId" : "commons-beansutils",
+                "artifactId" : "commons-beansutils",
+                "version" : "1.8.3"
+            },{
+                "groupId" : "org.springframework",
+                "artifactId" : "spring-context-support",
+                "version" : "3.2.4.RELEASE"
+            },{
+                "groupId" : "org.springframework",
+                "artifactId" : "spring-aop",
+                "version" : "3.2.4.RELEASE"
+            },{
+                "groupId" : "org.hibernate",
+                "artifactId" : "hibernate-ehcache",
+                "version" : "4.2.1.Final"
+            },{
+                "groupId" : "dom4J",
+                "artifactId" : "dom4j",
+                "version" : "1.6.1"
+            },{
+                "groupId" : "com.googlecode.json-simple",
+                "artifactId" : "json-simple",
+                "version" : "1.1.1"
+            },{
+                "groupId" : "org.jadira",
+                "artifactId" : "usertype.spi",
+                "version" : "3.1.0.CR8"
+            },{
+                "groupId" : "javax.servlet.jsp",
+                "artifactId" : "jsp-api",
+                "version" : "2.2"
+            },{
+                "groupId" : "org.springframework",
+                "artifactId" : "spring-expression",
+                "version" : "3.2.4.RELEASE"
+            },{
+                "groupId" : "org.springframework",
+                "artifactId" : "spring-beans",
+                "version" : "3.2.4.RELEASE"
+            },{
+                "groupId" : "jstl",
+                "artifactId" : "jstl",
+                "version" : "1.2"
+            },{
+                "groupId" : "org.webjars",
+                "artifactId" : "jquery",
+                "version" : "1.9.0"
+            },{
+                "groupId" : "ch.qos.logback",
+                "artifactId" : "logback-core",
+                "version" : "1.0.13"
+            },{
+                "groupId" : "com.github.dandelion",
+                "artifactId" : "datatables-servlet2",
+                "version" : "0.8.14"
+            },{
+                "groupId" : "org.slf4j",
+                "artifactId" : "jcl-over-slf4j",
+                "version" : "1.7.1"
+            },{
+                "groupId" : "org.springframework",
+                "artifactId" : "spring-jms",
+                "version" : "3.2.4.RELEASE"
+            },{
+                "groupId" : "org.springframework",
+                "artifactId" : "spring-test",
+                "version" : "3.2.4.RELEASE"
+            },{
+                "groupId" : "org.springframework",
+                "artifactId" : "spring-oxm",
+                "version" : "3.2.4.RELEASE"
+            },{
+                "groupId" : "antlr",
+                "artifactId" : "antlr",
+                "version" : "2.7.7"
+            },{
+                "groupId" : "org.apache.tomcat",
+                "artifactId" : "tomcat-juli",
+                "version" : "7.0.42"
+            },{
+                "groupId" : "com.github.dandelion",
+                "artifactId" : "datatables-jsp",
+                "version" : "0.8.14"
+            },{
+                "groupId" : "javassist",
+                "artifactId" : "javassist",
+                "version" : "3.15.0-GA"
+            },{
+                "groupId" : "org.hamcrest",
+                "artifactId" : "hamcrest-library",
+                "version" : "1.3"
+            },{
+                "groupId" : "org.hibernate",
+                "artifactId" : "hibernate-jpa-2.0-api",
+                "version" : "1.0.1.Final"
+            },{
+                "groupId" : "javax.xml.bind",
+                "artifactId" : "jaxb-api",
+                "version" : "2.2.7"
+            },{
+                "groupId" : "javax.xml.bind",
+                "artifactId" : "jsr173_api",
+                "version" : "1.0"
+            },{
+                "groupId" : "org.springframework",
+                "artifactId" : "spring-context",
+                "version" : "3.2.4.RELEASE"
+            },{
+                "groupId" : "org.hibernate",
+                "artifactId" : "hibernate-entitymanager",
+                "version" : "4.2.1.Final"
+            },{
+                "groupId" : "org.jadira",
+                "artifactId" : "usertype.core",
+                "version" : "3.1.0.CR8"
+            },{
+                "groupId" : "joda-time",
+                "artifactId" : "joda-time-hibernate",
+                "version" : "1.3"
+            },{
+                "groupId" : "org.hibernate",
+                "artifactId" : "hibernate-commons-annotations",
+                "version" : "4.0.1.Final"
+            },{
+                "groupId" : "org.junit",
+                "artifactId" : "junit",
+                "version" : "4.11"
+            },{
+                "groupId" : "commons-lang",
+                "artifactId" : "common-lang",
+                "version" : "2.6"
+            },{
+                "groupId" : "ch.qos.logback",
+                "artifactId" : "logback-access",
+                "version" : "1.0.9"
+            },{
+                "groupId" : "javax.servlet",
+                "artifactId" : "servlet-api",
+                "version" : "2.5"
+            },{
+                "groupId" : "org.jboss.logging",
+                "artifactId" : "jboss-logging",
+                "version" : "3.1.0.GA"
+            },{
+                "groupId" : "aspectj",
+                "artifactId" : "aspectjrt",
+                "version" : "1.7.3"
+            },{
+                "groupId" : "com.github.dandelion",
+                "artifactId" : "datatables-export-itext",
+                "version" : "0.8.14"
+            },{
+                "groupId" : "com.sun.xml.bind",
+                "artifactId" : "jaxb-impl",
+                "version" : "2.2.7"
+            },{
+                "groupId" : "rome",
+                "artifactId" : "rome",
+                "version" : "1.0"
+            },{
+                "groupId" : "com.sun.xml.bind",
+                "artifactId" : "jaxb-core",
+                "version" : "2.2.7"
+            },{
+                "groupId" : "org.springframework",
+                "artifactId" : "spring-data-commons",
+                "version" : "1.5.2.RELEASE"
+            },{
+                "groupId" : "org.apache.tomcat",
+                "artifactId" : "tomcat-jdbc",
+                "version" : "7.0.42"
+            },{
+                "groupId" : "org.springframework",
+                "artifactId" : "spring-web",
+                "version" : "3.2.4.RELEASE"
+            },{
+                "groupId" : "org.hiberante",
+                "artifactId" : "hibernate-validator",
+                "version" : "4.3.1.Final"
+            },{
+                "groupId" : "org.jboss.spec.javax.transaction",
+                "artifactId" : "jboss-transaction-api_1.1_spec",
+                "version" : "1.0.1.Final"
+            },{
+                "groupId" : "joda-time",
+                "artifactId" : "joda-time",
+                "version" : "2.3"
+            },{
+                "groupId" : "aspectj",
+                "artifactId" : "aspectj-weaver",
+                "version" : "1.7.3"
+            },{
+                "groupId" : "org.webjars",
+                "artifactId" : "jquery-ui",
+                "version" : "1.9.2"
+            }
         ]
     }
 
