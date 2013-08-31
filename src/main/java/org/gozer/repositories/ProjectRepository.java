@@ -44,6 +44,7 @@ public class ProjectRepository {
     public Project create(Project project) {
         Project newProject = new Project(project);
         newProject.setId(++index);
+        newProject.setStatus(Project.Status.CREATED);
         projects.put(newProject.getId(), newProject);
         db.commit();
         return newProject;

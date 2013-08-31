@@ -105,6 +105,7 @@ public class CompilationService {
      */
     public Project build(Project project) {
 
+        LOGGER.debug("Building project {}", project);
         Set<File> dependencies = project.getDependenciesPaths();
         final List<Path> sourceRoots = project.getSourcePaths();
 

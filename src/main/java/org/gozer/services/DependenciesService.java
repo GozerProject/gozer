@@ -29,10 +29,16 @@ public class DependenciesService {
     }
 
     public Project resolve(Project project) {
+        if (project.hasBeenResolved()) {
+            project.cleanDependenciesPath();
+        }
+
         LOGGER.debug("resolving project {}", project);
         for (Dependency dependency : project.getDependencies().getCompile()) {
             LOGGER.debug("add {} as a dependency to project {}", dependency, project.getName());
-            project.addDependenciesPath(resolve(dependency));
+            File dependencyFile = resolve(dependency);
+            LOGGER.debug("path of the dependency : {}", dependencyFile.getAbsolutePath());
+            project.addDependenciesPath(dependencyFile);
         }
 
         project.setStatus(Project.Status.RESOLVED);

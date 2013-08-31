@@ -17,20 +17,20 @@ import static com.google.common.collect.Sets.newHashSet;
 public class Project implements Serializable {
     public enum Status {
         CREATED, DEPLOYED, CLONED, COMPILED, RESOLVED;
-    }
-    private Long id;
 
+    }
+
+    private Long id;
     private String name;
     private Status status;
+
     private String scm;
     private Dependencies dependencies;
     private Set<File> dependenciesPaths = newHashSet();
     private String path;
-
     public Project() {
         dependencies = new Dependencies();
     }
-
     public Project(Project project) {
         this.id = project.getId();
         this.name = project.getName();
@@ -93,6 +93,12 @@ public class Project implements Serializable {
         this.path = path;
     }
 
+    public boolean hasBeenResolved() {
+        return status.equals(Status.RESOLVED) ||
+                status.equals(Status.COMPILED) ||
+                status.equals(Status.DEPLOYED);
+    }
+
     @JsonIgnore
     public List<Path> getSourcePaths() {
         FileSystem fileSystem = FileSystems.getDefault();
@@ -103,6 +109,10 @@ public class Project implements Serializable {
 
     public void addDependenciesPath(File dependencyPath) {
         dependenciesPaths.add(dependencyPath);
+    }
+
+    public void cleanDependenciesPath() {
+        dependenciesPaths = newHashSet();
     }
 
     @Override
