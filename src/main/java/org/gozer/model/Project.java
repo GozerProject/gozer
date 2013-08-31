@@ -1,6 +1,7 @@
 package org.gozer.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.common.base.Objects;
 
 import java.io.File;
 import java.io.Serializable;
@@ -97,5 +98,18 @@ public class Project implements Serializable {
 
     public void addDependenciesPath(File dependencyPath) {
         dependenciesPaths.add(dependencyPath);
+    }
+
+    @Override
+    public String toString() {
+        return Objects.toStringHelper(this)
+                .add("id", id)
+                .add("name", name)
+                .add("status", status)
+                .add("scm", scm)
+                .add("dependencies", dependencies)
+                .add("dependenciesPaths", dependenciesPaths)
+                .add("path", path)
+                .toString();
     }
 }

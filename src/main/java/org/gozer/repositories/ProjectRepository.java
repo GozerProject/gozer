@@ -72,4 +72,17 @@ public class ProjectRepository {
 
         return null;
     }
+
+    public Boolean delete(String name) {
+        checkNotNull(name);
+
+        for (Project project : projects.values()) {
+            if (name.equals(project.getName())) {
+                LOGGER.debug("Delete project {}", project.getName());
+                projects.remove(project);
+                return true;
+            }
+        }
+        return false;
+    }
 }

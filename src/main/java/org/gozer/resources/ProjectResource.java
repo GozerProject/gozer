@@ -8,10 +8,7 @@ import org.gozer.services.DeploiementService;
 import org.gozer.services.GitService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import restx.annotations.GET;
-import restx.annotations.POST;
-import restx.annotations.PUT;
-import restx.annotations.RestxResource;
+import restx.annotations.*;
 import restx.factory.Component;
 import restx.security.PermitAll;
 
@@ -52,14 +49,22 @@ public class ProjectResource {
     @PermitAll
     @POST("/projects")
     public Project create(Project project) {
+        LOGGER.info("Create project : {}", project.getName());
+        LOGGER.debug("project information : {}", project);
         return projectRepository.create(project);
+    }
+
+    @PermitAll
+    @DELETE("/projects/{projectName}")
+    public boolean delete(String projectName) {
+        return projectRepository.delete(projectName);
     }
 
     @PermitAll
     @PUT("/projects/{projectName}/resolve")
     public Project resolve(String projectName) {
 
-        checkNotNull(projectName);
+        checkNotNull(projectName); // TODO ça ne peut pas arriver
         Project project = projectRepository.findByName(projectName);
         if (project == null) {
             return null;
