@@ -1,5 +1,6 @@
 package org.gozer.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.base.Objects;
 
 import java.io.Serializable;
@@ -63,6 +64,7 @@ public class Dependency implements Serializable {
         this.packaging = packaging;
     }
 
+    @JsonIgnore
     public String getMavenUrl() {
         StringBuilder sb = new StringBuilder();
         sb.append("mvn").append(":")
@@ -76,9 +78,10 @@ public class Dependency implements Serializable {
     @Override
     public String toString() {
         return Objects.toStringHelper(this)
-                .add("groupId", groupId)
-                .add("artifactId", artifactId)
-                .add("version", version)
+                .add("", groupId)
+                .add("", artifactId)
+                .add("", version)
+                .add("", packaging)
                 .toString();
     }
 }

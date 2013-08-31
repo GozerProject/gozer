@@ -24,12 +24,11 @@ public class Project implements Serializable {
     private Status status;
     private String scm;
     private Dependencies dependencies;
-    private Set<File> dependenciesPaths;
+    private Set<File> dependenciesPaths = newHashSet();
     private String path;
 
     public Project() {
         dependencies = new Dependencies();
-        dependenciesPaths = newHashSet();
     }
 
     public Project(Project project) {

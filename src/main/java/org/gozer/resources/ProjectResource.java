@@ -70,6 +70,8 @@ public class ProjectResource {
             return null;
         }
 
+        LOGGER.debug("Try to resolve the project {}", project.getName());
+
         project = dependenciesService.resolve(project);
 
         return project;

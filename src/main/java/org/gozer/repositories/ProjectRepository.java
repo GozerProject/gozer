@@ -23,7 +23,6 @@ public class ProjectRepository {
     private DB db;
 
     public ProjectRepository() {
-        LOGGER.info("Created");
         index = 0L;
 
         // configure and open database using builder pattern.
@@ -35,7 +34,7 @@ public class ProjectRepository {
 
 // open existing an collection (or create new)
         projects = db.getTreeMap("collectionName");
-        LOGGER.info("projects : {}", projects);
+        LOGGER.debug("Projects in configuration : {}", projects);
      }
 
     public Collection<Project> getAll() {
