@@ -12,10 +12,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
+import static com.google.common.collect.Sets.newHashSet;
+
 public class Project implements Serializable {
     public enum Status {
-        DEPLOYED, CLONED, COMPILED, RESOLVED;
-
+        CREATED, DEPLOYED, CLONED, COMPILED, RESOLVED;
     }
     private Long id;
 
@@ -28,11 +29,16 @@ public class Project implements Serializable {
 
     public Project() {
         dependencies = new Dependencies();
+        dependenciesPaths = newHashSet();
     }
 
     public Project(Project project) {
         this.id = project.getId();
         this.name = project.getName();
+        this.scm = project.getScm();
+        this.path = project.getPath();
+        this.status = project.getStatus();
+        this.dependenciesPaths = project.getDependenciesPaths();
         this.dependencies = project.getDependencies();
     }
 
