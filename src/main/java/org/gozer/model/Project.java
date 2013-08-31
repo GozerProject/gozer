@@ -21,10 +21,11 @@ public class Project implements Serializable {
     }
 
     private Long id;
+
     private String name;
     private Status status;
-
     private String scm;
+
     private Dependencies dependencies;
     private Set<File> dependenciesPaths = newHashSet();
     private String path;

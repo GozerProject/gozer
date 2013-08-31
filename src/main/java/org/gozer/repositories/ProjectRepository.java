@@ -32,7 +32,7 @@ public class ProjectRepository {
 //                .encryptionEnable("password")
                 .make();
 
-// open existing an collection (or create new)
+        // open existing an collection (or create new)
         projects = db.getTreeMap("collectionName");
         LOGGER.debug("Projects in configuration : {}", projects);
      }
@@ -79,7 +79,7 @@ public class ProjectRepository {
         for (Project project : projects.values()) {
             if (name.equals(project.getName())) {
                 LOGGER.debug("Delete project {}", project.getName());
-                projects.remove(project);
+                projects.remove(project.getId());
                 return true;
             }
         }

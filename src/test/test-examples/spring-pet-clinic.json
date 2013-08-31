@@ -74,13 +74,6 @@
             },{
                 "groupId" : "org.springframework.data",
                 "artifactId" : "spring-data-jpa",
-                "version" : "1.3.4.RELEASE"
-            },{
-                "groupId" : "net.sf.ehcache",
-                "artifactId" : "ehcache-core",
-                "version" : "2.6.6"
-            },{
-                "groupId" : "org.hsqldb",
                 "artifactId" : "hsqldb",
                 "version" : "2.3.0"
             },{
