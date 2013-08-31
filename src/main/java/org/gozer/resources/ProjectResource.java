@@ -6,6 +6,8 @@ import org.gozer.services.CompilationService;
 import org.gozer.services.DependenciesService;
 import org.gozer.services.DeploiementService;
 import org.gozer.services.GitService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import restx.annotations.GET;
 import restx.annotations.POST;
 import restx.annotations.PUT;
@@ -21,6 +23,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 @RestxResource
 public class ProjectResource {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(ProjectResource.class);
     private DependenciesService dependenciesService;
     private ProjectRepository projectRepository;
     private GitService gitService;
@@ -91,6 +94,7 @@ public class ProjectResource {
         if (project == null) {
             return null;
         }
+        LOGGER.debug("Try to clone the project {}", project.getName());
 
         project = gitService.cloneRepository(project);
 

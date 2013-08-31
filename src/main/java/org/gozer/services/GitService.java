@@ -26,7 +26,10 @@ public class GitService {
     public Project cloneRepository(Project project) {
 
         String localPath = globalRepoPath + "/" + project.getName();
+        LOGGER.debug("local path of the cloned repository : [{}]", localPath);
+
         String remotePath = project.getScm();
+        LOGGER.debug("URL of of the repository [{}]", remotePath);
 //        FileRepository localRepo = new FileRepository(localPath + "/.git");
 //        Git git = new Git(localRepo);
 
@@ -46,7 +49,7 @@ public class GitService {
 
         project.setPath(localPath);
         project.setStatus(CLONED);
-
+        LOGGER.info("Project {} has been cloned", project.getName());
         return project;
     }
 

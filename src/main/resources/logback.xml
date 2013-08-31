@@ -15,6 +15,7 @@
     <logger name="org.eclipse.jetty.server.handler.ContextHandler" level="WARN" />
     <logger name="org.hibernate.validator.internal.engine.ConfigurationImpl" level="WARN" />
     <logger name="restx.factory.Factory" level="WARN" />
+    <logger name="org.gozer" level="DEBUG" />
 
     <root level="info">
         <appender-ref ref="FILE"/>
