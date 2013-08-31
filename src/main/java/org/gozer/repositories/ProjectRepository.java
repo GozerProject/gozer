@@ -28,7 +28,7 @@ public class ProjectRepository {
 
         // configure and open database using builder pattern.
         // all options are available with code auto-completion.
-        db = DBMaker.newFileDB(new File("testdb"))
+        db = DBMaker.newFileDB(new File("target/gozerdb"))
                 .closeOnJvmShutdown()
 //                .encryptionEnable("password")
                 .make();
