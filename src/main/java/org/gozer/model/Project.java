@@ -1,5 +1,7 @@
 package org.gozer.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.File;
 import java.io.Serializable;
 import java.nio.file.FileSystem;
@@ -85,6 +87,7 @@ public class Project implements Serializable {
         this.path = path;
     }
 
+    @JsonIgnore
     public List<Path> getSourcePaths() {
         FileSystem fileSystem = FileSystems.getDefault();
         Path sourceRoot = fileSystem.getPath(path+"/src/main/java");
