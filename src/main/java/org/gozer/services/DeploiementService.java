@@ -60,8 +60,8 @@ public class DeploiementService {
         // add compiled classes to classpath
         sb.append(classesPath).append(";");
         // add resources to classpath TODO merge into compiled directory
-        sb.append(globalRepoPath+"/"+project.getName()+"/+src/main/resources/");
-
+        sb.append(globalRepoPath+"/"+project.getName()+"/src/main/resources/");
+        LOGGER.debug("classpath : {}", sb);
         return sb.toString();
     }
 
