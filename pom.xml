@@ -23,6 +23,8 @@
         <logback-classic.version>1.0.9</logback-classic.version>
         <junit.version>4.11</junit.version>
         <assertj.version>1.1.0</assertj.version>
+        <org.kevoree.kcl.version>1</org.kevoree.kcl.version>
+        <jetty.version>8.1.8.v20121106</jetty.version>
     </properties>
 
     <dependencies>
@@ -72,6 +74,11 @@
             <version>2.0.0.201206130900-r</version>
         </dependency>
         <dependency>
+            <groupId>org.kevoree.kcl</groupId>
+            <artifactId>org.kevoree.kcl</artifactId>
+            <version>${org.kevoree.kcl.version}</version>
+        </dependency>
+        <dependency>
             <groupId>io.restx</groupId>
             <artifactId>restx-specs-tests</artifactId>
             <version>${restx.version}</version>
@@ -96,27 +103,27 @@
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-io</artifactId>
-            <version>8.1.8.v20121106</version>
+            <version>${jetty.version}</version>
         </dependency>
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-server</artifactId>
-            <version>8.1.8.v20121106</version>
+            <version>${jetty.version}</version>
         </dependency>
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-servlet</artifactId>
-            <version>8.1.8.v20121106</version>
+            <version>${jetty.version}</version>
         </dependency>
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-io</artifactId>
-            <version>8.1.8.v20121106</version>
+            <version>${jetty.version}</version>
         </dependency>
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-webapp</artifactId>
-            <version>8.1.8.v20121106</version>
+            <version>${jetty.version}</version>
         </dependency>
         <dependency>
             <groupId>org.mortbay.jetty</groupId>
