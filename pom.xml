@@ -55,6 +55,8 @@
         <logback-classic.version>1.0.9</logback-classic.version>
         <junit.version>4.11</junit.version>
         <assertj.version>1.1.0</assertj.version>
+        <org.kevoree.kcl.version>1</org.kevoree.kcl.version>
+        <jetty.version>8.1.8.v20121106</jetty.version>
     </properties>
 
     <dependencies>
