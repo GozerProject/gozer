@@ -201,7 +201,7 @@
                 "artifactId" : "joda-time-hibernate",
                 "version" : "1.3"
             },{
-                "groupId" : "org.hibernate",
+                "groupId" : "org.hibernate.common",
                 "artifactId" : "hibernate-commons-annotations",
                 "version" : "4.0.1.Final"
             },{

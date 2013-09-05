@@ -2,6 +2,7 @@ package org.gozer.services;
 
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
+import org.eclipse.jgit.api.errors.JGitInternalException;
 import org.gozer.GozerFactory;
 import org.gozer.model.Project;
 import org.slf4j.Logger;
@@ -45,6 +46,8 @@ public class GitService {
                     .call();
         } catch (GitAPIException e) {
             LOGGER.error("Error during cloning the repository", e);
+        } catch(JGitInternalException e) {
+            LOGGER.error("Project is already cloned", e);
         }
 
         project.setPath(localPath);
