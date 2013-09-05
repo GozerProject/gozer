@@ -85,4 +85,9 @@ public class ProjectRepository {
         }
         return false;
     }
+
+    public void update(Project project) {
+        projects.put(project.getId(), project);
+        db.commit();
+    }
 }

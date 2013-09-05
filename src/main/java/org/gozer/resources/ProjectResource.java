@@ -74,6 +74,8 @@ public class ProjectResource {
 
         project = dependenciesService.resolve(project);
 
+        projectRepository.update(project);
+
         return project;
     }
 
