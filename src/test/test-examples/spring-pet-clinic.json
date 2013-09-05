@@ -100,6 +100,10 @@
                 "artifactId" : "hibernate-ehcache",
                 "version" : "4.2.1.Final"
             },{
+                "groupId" : "net.sf.ehcache",
+                "artifactId" : "ehcache-core",
+                "version" : "2.6.6"
+            },{
                 "groupId" : "dom4j",
                 "artifactId" : "dom4j",
                 "version" : "1.6.1"
