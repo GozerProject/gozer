@@ -4,6 +4,7 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.gozer.GozerFactory;
 import org.gozer.model.Project;
+import org.kevoree.kcl.KevoreeJarClassLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import restx.factory.Component;
@@ -34,19 +35,34 @@ public class DeploiementService {
         String WEB_INF_LOCATION = globalRepoPath +"/"+ project.getName()+ "/" + WEB_XML_STANDARD_LOCATION;
         String WEB_APP_LOCATION = globalRepoPath +"/"+ project.getName()+ "/" + WEBAPP_STANDARD_LOCATION;
 
-            try {
-                Server server = new Server(DEFAULT_PORT);
-                WebAppContext handler = new WebAppContext();
-                handler.setResourceBase(WEB_APP_LOCATION);
-                handler.setContextPath("/"+project.getName());
-                handler.setExtraClasspath(buildDeploymentClasspath(project));
-                LOGGER.debug("classpath : {}", handler.getExtraClasspath());
-                handler.setDescriptor(WEB_INF_LOCATION);
-                server.setHandler(handler);
-                server.start();
-            } catch (Exception ex) {
-                LOGGER.error("Error :",ex);
+        try {
+            Server server = new Server(DEFAULT_PORT);
+            WebAppContext handler = new WebAppContext();
+            handler.setResourceBase(WEB_APP_LOCATION);
+            handler.setContextPath("/"+project.getName());
+//            handler.setExtraClasspath(buildDeploymentClasspath(project));
+            LOGGER.debug("classpath : {}", handler.getExtraClasspath());
+            handler.setDescriptor(WEB_INF_LOCATION);
+
+
+
+            KevoreeJarClassLoader kclScope1 = new KevoreeJarClassLoader();
+            kclScope1.isolateFromSystem();
+
+            for (File dependencyPath : project.getDependenciesPaths()) {
+                KevoreeJarClassLoader kclScope = new KevoreeJarClassLoader();
+                kclScope.addJarFromURL(dependencyPath.toURI().toURL());
+                LOGGER.info("deploiement jar path : {}", dependencyPath.toURI().toURL());
+                kclScope1.addChild(kclScope);
             }
+
+            handler.setClassLoader(kclScope1);
+            server.setHandler(handler);
+            server.start();
+
+        } catch (Exception ex) {
+            LOGGER.error("Error :",ex);
+        }
         project.setStatus(Project.Status.DEPLOYED);
         return project;
     }
