@@ -3,7 +3,7 @@
 ### Start From IDE
 
 
-* Launch the main of org.gozer.GozerServer
+* Launch the main of GozerServer
 
 ### How to use
 
