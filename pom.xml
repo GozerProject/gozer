@@ -17,6 +17,11 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
+    <ciManagement>
+        <system>cloudbees</system>
+        <url>https://sebbrousse.ci.cloudbees.com/job/Gozer/</url>
+    </ciManagement>
+
     <issueManagement>
         <system>github</system>
         <url>https://github.com/GozerProject/gozer/issues</url>
@@ -48,9 +53,9 @@
     </scm>
 
     <properties>
-        <maven.compiler.source>1.7</maven.compiler.source>
-        <maven.compiler.target>1.7</maven.compiler.target>
+        <project.java.version>1.7</project.java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <restx.version>0.2.8</restx.version>
         <logback-classic.version>1.0.9</logback-classic.version>
         <junit.version>4.11</junit.version>
@@ -64,5 +69,67 @@
             <version>${logback-classic.version}</version>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <source>${project.java.version}</source>
+                    <target>${project.java.version}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>2.2.1</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <encoding>${project.reporting.outputEncoding}</encoding>
+                    <links>
+                        <link>http://docs.oracle.com/javase/7/docs/api/</link>
+                    </links>
+                    <version>true</version>
+                    <show>public</show>
+                </configuration>
+            </plugin>
+        </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.1</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>2.4</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+
     
 </project>
