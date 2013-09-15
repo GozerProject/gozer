@@ -8,8 +8,31 @@
     <version>0.1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Gozer :: Parent</name>
-    <description></description>
     <url>http://gozer.io</url>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <issueManagement>
+        <system>github</system>
+        <url>https://github.com/GozerProject/gozer/issues</url>
+    </issueManagement>
+    <developers>
+        <developer>
+            <id>dukeboard</id>
+            <name>François Fouquet</name>
+            <email>fouquet dot f at gmail dot com</email>
+        </developer>
+        <developer>
+            <id>sebbrousse</id>
+            <name>Sebastien Brousse</name>
+            <email>seb dot brousse at gmail dot com</email>
+        </developer>
+    </developers>
 
     <modules>
         <module>gozer-model</module>
