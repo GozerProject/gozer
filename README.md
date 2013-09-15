@@ -1,13 +1,11 @@
-Gozer
-=====
+# Gozer
 
-Start From IDE
-==============
+### Start From IDE
+
 
 * Launch the main of org.gozer.GozerServer
 
-How to use
-==========
+### How to use
 
 * Go to the admin url (default is admin/juma) at http://localhost:8080/api/@/ui/api-docs/#
 
@@ -21,5 +19,15 @@ How to use
 * Compile (same)
 
 * Deploy
+
+
+#### Continuous Integration on Cloudbees
+
+
+![Cloudbees](http://web-static-cloudfront.s3.amazonaws.com/images/badges/BuiltOnDEV.png)
+
+#### License
+
+[The Apache Software License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0.txt)
 
 
