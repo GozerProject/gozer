@@ -21,7 +21,14 @@
 * Deploy
 
 
-#### Continuous Integration on Cloudbees
+### Build status
+
+[![Build Status](https://buildhive.cloudbees.com/job/GozerProject/job/gozer/badge/icon)](https://buildhive.cloudbees.com/job/GozerProject/job/gozer/)
+
+#### Contributors
+
+ - [Sébastien Brousse](https://twitter.com/seb_brousse) (principal maintainer)
+ - [François Fouquet](https://twitter.com/dukeboard) (principal maintainer)
 
 
 ![Cloudbees](http://web-static-cloudfront.s3.amazonaws.com/images/badges/BuiltOnDEV.png)
