@@ -1,0 +1,67 @@
+/* app css stylesheet */
+
+.menu {
+  list-style: none;
+  border-bottom: 0.1em solid black;
+  margin-bottom: 2em;
+  padding: 0 0 0.5em;
+}
+
+.menu:before {
+  content: "[";
+}
+
+.menu:after {
+  content: "]";
+}
+
+.menu > li {
+  display: inline;
+}
+
+.menu > li:before {
+  content: "|";
+  padding-right: 0.3em;
+}
+
+.menu > li:nth-child(1):before {
+  content: "";
+  padding: 0;
+}
+
+/* Editable content */
+div[contentEditable] {
+    cursor: pointer;
+    background-color: white;
+    padding: .2em;
+}
+
+div[contentEditable]:focus {
+    cursor: pointer;
+    background-color: #D0D0D0;
+    border: 1px solid red;
+    padding: .2em;
+}
+
+div[contentEditable]:focus {
+    cursor: pointer;
+    background-color: #D0D0D0;
+    border: 1px solid red;
+    padding: .2em;
+}
+
+.skillz-edit {
+    padding: .2em;
+    border: 1px solid;
+    background-color: #D0D0D0;
+    font-size: 31.5px;
+}
+
+.row > div {
+    margin: 10px;
+}
+
+textarea {
+    height: 150px;
+}
+
