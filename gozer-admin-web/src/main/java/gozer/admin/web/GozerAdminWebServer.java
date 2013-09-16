@@ -17,7 +17,7 @@ public class GozerAdminWebServer {
             Server server = new Server(8080);
             WebAppContext handler = new WebAppContext();
             handler.setResourceBase(WEB_APP_LOCATION);
-            handler.setContextPath("/admin");
+            handler.setContextPath("/");
             handler.setDescriptor(WEB_INF_LOCATION);
             server.setHandler(handler);
             server.start();

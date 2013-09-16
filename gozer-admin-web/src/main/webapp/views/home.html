@@ -1,4 +1,5 @@
 <h1>Gozer Admin</h1>
+<div ng-controller="FileUploadCtrl">
 
 <div class="control-group">
     <div class="controls">
@@ -8,4 +9,16 @@
                    multiple upload><span>Add files...</span>
         </span>
     </div>
+</div>
+
+<div>
+    <span ng-show="!files.length">No files selected</span>
+    <ul>
+        <li ng-repeat="file in files">{{file}}</li>
+    </ul>
+</div>
+
+<div class="form-actions">
+    <button type="submit" class="btn btn-primary pull-left" ng-click="upload()">Upload</button>
+</div>
 </div>
