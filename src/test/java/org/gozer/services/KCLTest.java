@@ -10,6 +10,8 @@ import java.io.File;
 import java.net.MalformedURLException;
 import java.util.Arrays;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class KCLTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(KCLTest.class);
@@ -24,15 +26,20 @@ public class KCLTest {
         MavenResolver resolver = new MavenResolver();
         resolver.setBasePath("target/repository");
 
-        File dependencyPath = resolver.resolve("mvn:org.springframework:spring-core:3.2.4.RELEASE:jar", Arrays.asList("http://repo1.maven.org/maven2"));
+        File dependencyPath = resolver.resolve("mvn:org.kevoree.kcl:org.kevoree.kcl:1:jar", Arrays.asList("http://repo1.maven.org/maven2"));
 
         kclScope.addJarFromURL(dependencyPath.toURI().toURL());
-        LOGGER.info("deploiement jar path : {}", dependencyPath.toURI().toURL());
-        kclScope1.addChild(kclScope);
+//        kclScope.add(dependencyPath.toURI().toURL());
 
-        Class cl1 = kclScope.loadClass("org.springframework.core.io.Resource");
-        Object objOfCl1 = cl1.newInstance();
+//        kclScope.add(this.getClass().getClassLoader().getResourceAsStream("org.kevoree.kcl.jar"));
 
+//        LOGGER.info("deploiement jar path : {}", dependencyPath.toURI().toURL());
+//        kclScope1.addChild(kclScope);
+
+        Class resolvedClass = kclScope.loadClass("org.kevoree.kcl.KevoreeJarClassLoader");
+//        Class cl1 = kclScope.loadClass("org.springframework.core.io.Resource");
+        Object objOfCl1 = resolvedClass.newInstance();
+        assertThat(objOfCl1).isInstanceOf(KevoreeJarClassLoader.class);
 //        KevoreeJarClassLoader kclScope2 = new KevoreeJarClassLoader();
 //
 //        //can be call dynamicallly at anytime
