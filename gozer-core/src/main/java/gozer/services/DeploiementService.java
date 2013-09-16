@@ -53,7 +53,7 @@ public class DeploiementService {
                 KevoreeJarClassLoader kclScope = new KevoreeJarClassLoader();
                 kclScope.addJarFromURL(dependencyPath.toURI().toURL());
                 LOGGER.info("deploiement jar path : {}", dependencyPath.toURI().toURL());
-                kclScope1.addChild(kclScope);
+                kclScope.addChild(kclScope1);
             }
 
             handler.setClassLoader(kclScope1);
