@@ -28,7 +28,7 @@
 #### Contributors
 
  - [Sébastien Brousse](https://twitter.com/seb_brousse) (principal maintainer)
- - [François Fouquet](https://twitter.com/dukeboard) (principal maintainer)
+ - [François Fouquet](https://github.com/dukeboard) (principal maintainer)
 
 
 ![Cloudbees](http://web-static-cloudfront.s3.amazonaws.com/images/badges/BuiltOnDEV.png)
