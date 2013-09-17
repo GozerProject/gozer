@@ -17,6 +17,7 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
+
     <ciManagement>
         <system>cloudbees</system>
         <url>https://sebbrousse.ci.cloudbees.com/job/Gozer/</url>
@@ -28,14 +29,14 @@
     </issueManagement>
     <developers>
         <developer>
-            <id>dukeboard</id>
-            <name>François Fouquet</name>
-            <email>fouquet dot f at gmail dot com</email>
-        </developer>
-        <developer>
             <id>sebbrousse</id>
             <name>Sebastien Brousse</name>
             <email>seb dot brousse at gmail dot com</email>
+        </developer>
+        <developer>
+            <id>dukeboard</id>
+            <name>François Fouquet</name>
+            <email>fouquet dot f at gmail dot com</email>
         </developer>
     </developers>
 
