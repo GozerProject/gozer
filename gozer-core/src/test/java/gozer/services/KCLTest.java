@@ -1,4 +1,4 @@
-package org.gozer.services;
+package gozer.services;
 
 import org.junit.Test;
 import org.kevoree.kcl.KevoreeJarClassLoader;
@@ -29,25 +29,11 @@ public class KCLTest {
         File dependencyPath = resolver.resolve("mvn:org.kevoree.kcl:org.kevoree.kcl:1:jar", Arrays.asList("http://repo1.maven.org/maven2"));
 
         kclScope.addJarFromURL(dependencyPath.toURI().toURL());
-//        kclScope.add(dependencyPath.toURI().toURL());
-
-//        kclScope.add(this.getClass().getClassLoader().getResourceAsStream("org.kevoree.kcl.jar"));
-
-//        LOGGER.info("deploiement jar path : {}", dependencyPath.toURI().toURL());
-//        kclScope1.addChild(kclScope);
 
         Class resolvedClass = kclScope.loadClass("org.kevoree.kcl.KevoreeJarClassLoader");
-//        Class cl1 = kclScope.loadClass("org.springframework.core.io.Resource");
+
         Object objOfCl1 = resolvedClass.newInstance();
         assertThat(objOfCl1).isInstanceOf(KevoreeJarClassLoader.class);
-//        KevoreeJarClassLoader kclScope2 = new KevoreeJarClassLoader();
-//
-//        //can be call dynamicallly at anytime
-//        //removeChild also available
-//        kclScope2.addChild(kclScope1);
-//
-//        Class clMain = kclScope2.loadClass("yourMain");
-//        //slf4j classes will be resolved transitively
-//        clMain.getMethod("main").invoke();
+
     }
 }
