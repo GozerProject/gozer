@@ -3,6 +3,7 @@ package gozer.model.builders;
 import gozer.model.Dependency;
 
 public class DependencyBuilder {
+
     private String groupId;
     private String artifactId;
     private String version;
