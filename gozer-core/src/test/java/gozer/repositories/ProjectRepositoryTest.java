@@ -3,6 +3,7 @@ package gozer.repositories;
 import com.google.common.collect.ImmutableMap;
 import gozer.model.Project;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Collection;
@@ -10,6 +11,7 @@ import java.util.Collection;
 import static gozer.model.builders.ProjectBuilder.aProject;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Ignore
 public class ProjectRepositoryTest {
 
     private ProjectRepository projectRepository;

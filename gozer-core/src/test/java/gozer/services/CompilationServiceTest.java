@@ -4,6 +4,7 @@ import gozer.model.Project;
 import gozer.services.compiler.CompilationFinishedEvent;
 import org.assertj.core.util.Files;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.File;
@@ -19,6 +20,7 @@ import java.util.List;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Ignore
 public class CompilationServiceTest {
     FileSystem fileSystem = FileSystems.getDefault();
     Path testSourceRoot = fileSystem.getPath("src/test/test-examples");
