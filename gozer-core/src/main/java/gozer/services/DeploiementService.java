@@ -40,7 +40,6 @@ public class DeploiementService {
             WebAppContext handler = new WebAppContext();
             handler.setResourceBase(WEB_APP_LOCATION);
             handler.setContextPath("/"+project.getName());
-//            handler.setExtraClasspath(buildDeploymentClasspath(project));
             LOGGER.debug("classpath : {}", handler.getExtraClasspath());
             handler.setDescriptor(WEB_INF_LOCATION);
 
@@ -66,7 +65,5 @@ public class DeploiementService {
         project.setStatus(Project.Status.DEPLOYED);
         return project;
     }
-
-
 
 }
