@@ -11,7 +11,8 @@ public class DeploiementServiceTest {
     public void should_deploy_project() {
         Project project = aProject().withName("spring-pet-clinic")
                                     .build();
-        DeploiementService deploiementService = new DeploiementService("target/git", "target/temp/classes");
+        // TODO inject DependenciesService
+        DeploiementService deploiementService = new DeploiementService("target/git", "target/temp/classes", null);
         deploiementService.deploy(project);
     }
 }

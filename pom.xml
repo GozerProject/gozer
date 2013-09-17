@@ -63,6 +63,7 @@
         <assertj.version>1.1.0</assertj.version>
         <org.kevoree.kcl.version>1</org.kevoree.kcl.version>
         <jetty.version>8.1.8.v20121106</jetty.version>
+        <guava.version>15.0</guava.version>
     </properties>
 
     <dependencies>
@@ -72,6 +73,17 @@
             <version>${logback-classic.version}</version>
         </dependency>
     </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
 
     <build>
         <plugins>

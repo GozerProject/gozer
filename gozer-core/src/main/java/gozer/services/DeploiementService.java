@@ -1,6 +1,7 @@
 package gozer.services;
 
 import gozer.GozerFactory;
+import gozer.model.Dependency;
 import gozer.model.Project;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.webapp.WebAppContext;
@@ -11,6 +12,9 @@ import restx.factory.Component;
 
 import javax.inject.Named;
 import java.io.File;
+import java.net.MalformedURLException;
+
+import static gozer.model.builders.DependencyBuilder.aDependency;
 
 
 @Component
@@ -22,13 +26,16 @@ public class DeploiementService {
     private static final String WEB_XML_STANDARD_LOCATION = "src/main/webapp/WEB-INF/web.xml";
     private static final String WEBAPP_STANDARD_LOCATION = "src/main/webapp";
     private static final int DEFAULT_PORT = 8085;
+    private final DependenciesService dependenciesService;
     private String classesPath;
     private String globalRepoPath;
 
     public DeploiementService(@Named(GozerFactory.GLOBAL_REPO_PATH) String globalRepoPath,
-                              @Named(GozerFactory.COMPILATION_DESTINATION) String classesPath) {
+                              @Named(GozerFactory.COMPILATION_DESTINATION) String classesPath,
+                              DependenciesService dependenciesService) {
         this.globalRepoPath = globalRepoPath;
         this.classesPath = classesPath;
+        this.dependenciesService = dependenciesService;
     }
 
     public Project deploy(Project project) {
@@ -55,6 +62,8 @@ public class DeploiementService {
                 kclScope.addChild(kclScope1);
             }
 
+            kclScope1 = addJettyDependencies(kclScope1);
+
             handler.setClassLoader(kclScope1);
             server.setHandler(handler);
             server.start();
@@ -64,6 +73,19 @@ public class DeploiementService {
         }
         project.setStatus(Project.Status.DEPLOYED);
         return project;
+    }
+
+    private KevoreeJarClassLoader addJettyDependencies(KevoreeJarClassLoader kclScope1) throws MalformedURLException {
+        Dependency dependency = aDependency().withGroupId("org.eclipse.jetty")
+                                        .withArtifactId("jetty-servlet")
+                                        .withVersion("8.1.13.v20130916")
+                                        .build();
+        File dependencyFile = dependenciesService.resolve(dependency);
+        KevoreeJarClassLoader kclScope = new KevoreeJarClassLoader();
+        kclScope.addJarFromURL(dependencyFile.toURI().toURL());
+        LOGGER.info("deploiement jar path : {}", dependencyFile.toURI().toURL());
+        kclScope.addChild(kclScope1);
+        return kclScope1;
     }
 
 }
