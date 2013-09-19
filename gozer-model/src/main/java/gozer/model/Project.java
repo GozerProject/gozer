@@ -15,10 +15,6 @@ import java.util.Set;
 import static com.google.common.collect.Sets.newHashSet;
 
 public class Project implements Serializable {
-    public enum Status {
-        CREATED, DEPLOYED, CLONED, COMPILED, RESOLVED;
-
-    }
 
     private Long id;
 
