@@ -45,6 +45,7 @@
         <module>gozer-core</module>
         <module>gozer-rest</module>
         <module>gozer-maven-plugin</module>
+        <module>gozer-jetty</module>
     </modules>
 
     <scm>
