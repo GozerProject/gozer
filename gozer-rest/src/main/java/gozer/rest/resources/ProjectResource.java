@@ -2,6 +2,7 @@ package gozer.rest.resources;
 
 import gozer.model.Project;
 import gozer.repositories.ProjectRepository;
+import gozer.rest.exceptions.UnknownProjectException;
 import gozer.services.CompilationService;
 import gozer.services.DependenciesService;
 import gozer.services.DeploiementService;
@@ -97,15 +98,13 @@ public class ProjectResource {
     @PermitAll
     @PUT("/projects/{projectName}/clone")
     public Project clone(String projectName) {
-
-        checkNotNull(projectName);
         Project project = projectRepository.findByName(projectName);
         if (project == null) {
             return null;
         }
         LOGGER.debug("Try to clone the project {}", project.getName());
 
-        project = gitService.cloneRepository(project);
+        project = gitService.clone(project);
 
         return project;
     }
@@ -113,11 +112,10 @@ public class ProjectResource {
     @PermitAll
     @PUT("/projects/{projectName}/compile")
     public Project compile(String projectName) {
-
-        checkNotNull(projectName);
         Project project = projectRepository.findByName(projectName);
         if (project == null) {
-            return null;
+            LOGGER.warn("Project {} is unknown", projectName);
+            throw new UnknownProjectException(projectName);
         }
 
         project = compilationService.build(project);
