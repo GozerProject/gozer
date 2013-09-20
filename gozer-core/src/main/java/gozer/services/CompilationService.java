@@ -4,6 +4,7 @@ import com.google.common.base.Charsets;
 import com.google.common.base.Optional;
 import com.google.common.base.Stopwatch;
 import gozer.GozerFactory;
+import gozer.components.DefaultLifeCycle;
 import gozer.model.Project;
 import gozer.services.compiler.MoreFiles;
 import org.slf4j.Logger;
@@ -21,13 +22,12 @@ import java.util.concurrent.*;
 
 import static com.google.common.collect.Iterables.isEmpty;
 import static com.google.common.collect.Iterables.transform;
-import static gozer.model.builders.ProjectBuilder.aProject;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singleton;
 import static java.util.Collections.unmodifiableCollection;
 
 @Component
-public class CompilationService {
+public class CompilationService implements gozer.api.Compiler {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CompilationService.class);
 
@@ -48,17 +48,15 @@ public class CompilationService {
     private final long compilationTimeout = 60; // in seconds
     private Collection<Diagnostic<?>> lastDiagnostics = new CopyOnWriteArrayList<>();
 
-    public CompilationService(@Named(GozerFactory.COMPILATION_DESTINATION) String compilationDestination) {
+    public CompilationService(@Named(GozerFactory.COMPILATION_DESTINATION) String compilationDestination,
+                              DefaultLifeCycle defaultLifecycle) {
+        defaultLifecycle.register(this);
         FileSystem fileSystem = FileSystems.getDefault();
         destination = fileSystem.getPath(compilationDestination);
 
         javaCompiler = ToolProvider.getSystemJavaCompiler();
         fileManager = javaCompiler.getStandardFileManager(new DiagnosticCollector<JavaFileObject>(), Locale.ENGLISH, Charsets.UTF_8);
 
-    }
-
-    public Path getDestination() {
-        return destination;
     }
 
     private void copyResource(final Path dir, final Path resourcePath) {
@@ -103,8 +101,8 @@ public class CompilationService {
     /**
      * Clean destination and do a full build.
      */
+    @Override
     public Project build(Project project) {
-
         LOGGER.debug("Building project {}", project);
         Set<File> dependencies = project.getDependenciesPaths();
         final List<Path> sourceRoots = project.getSourcePaths();
@@ -207,28 +205,7 @@ public class CompilationService {
 
             boolean valid = compilationTask.call();
             if (valid) {
-//                for (Path source : sources) {
-//                    Path dir = null;
-//                    for (Path sourceRoot : sourceRoots) {
-//                        if ((source.isAbsolute() && source.startsWith(sourceRoot.toAbsolutePath()))
-//                                || (!source.isAbsolute() && source.startsWith(sourceRoot))) {
-//                            dir = sourceRoot;
-//                            break;
-//                        }
-//                    }
-//                    if (dir == null) {
-//                        LOGGER.warn("can't find sourceRoot for {}", source);
-//                    } else {
-//                        SourceHash sourceHash = newSourceHashFor(dir, source.isAbsolute() ?
-//                                dir.toAbsolutePath().relativize(source) :
-//                                dir.relativize(source)
-//                        );
-//                    }
-//                }
-
-//                saveHashes();
-
-                LOGGER.info("compilation finished: {} sources compiled in {}", sources.size(), stopwatch.stop());
+                LOGGER.info("Compilation finished: {} sources compiled in {}", sources.size(), stopwatch.stop());
                 for (Diagnostic<?> d : diagnostics.getDiagnostics()) {
                     LOGGER.debug("{}", d);
                 }
@@ -245,30 +222,8 @@ public class CompilationService {
         }
     }
 
-    /**
-     * @return true if this compilation manager is currently performing a compilation task.
-     */
-    public boolean isCompiling() {
-        return compiling;
+    @Override
+    public Project.Status getTo() {
+        return Project.Status.COMPILED;
     }
-
-    public static void main(String[] args) {
-
-        Project project = aProject().withName("spring-pet-clinic")
-                .withScm("https://github.com/SpringSource/spring-petclinic.git")
-                .build();
-
-        FileSystem fileSystem = FileSystems.getDefault();
-        Path sourceRoot = fileSystem.getPath("target/git/spring-pet-clinic/src/main/java");
-        Path dependenciesRoot = fileSystem.getPath("target/git/spring-pet-clinic/target/dependency");
-//        for (File file : dependenciesRoot.toFile().listFiles()) {
-//            System.out.println(file.getName());
-//        }
-
-        List<File> dependencies = Arrays.asList(dependenciesRoot.toFile().listFiles());
-        List<Path> sourceRoots = asList(sourceRoot);
-        CompilationService compilationService = new CompilationService("target/tmp/classes");
-        compilationService.build(project);
-    }
-
 }

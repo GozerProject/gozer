@@ -1,6 +1,7 @@
 package gozer.services;
 
 import gozer.GozerFactory;
+import gozer.api.Resolver;
 import gozer.model.Dependency;
 import gozer.model.Project;
 import org.kevoree.resolver.MavenResolver;
@@ -13,7 +14,7 @@ import java.io.File;
 import java.util.Arrays;
 
 @Component
-public class DependenciesService {
+public class DependenciesService implements Resolver {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DependenciesService.class);
     private static final String MAVEN_CENTRAL = "http://repo1.maven.org/maven2";
@@ -28,7 +29,9 @@ public class DependenciesService {
         return resolver.resolve(dependency.getMavenUrl(), Arrays.asList(MAVEN_CENTRAL));
     }
 
+    @Override
     public Project resolve(Project project) {
+
         if (project.hasBeenResolved()) {
             project.cleanDependenciesPath();
         }
@@ -46,4 +49,8 @@ public class DependenciesService {
         return project;
     }
 
+    @Override
+    public Project.Status getTo() {
+        return Project.Status.RESOLVED;
+    }
 }

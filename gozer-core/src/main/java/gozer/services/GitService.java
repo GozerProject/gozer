@@ -1,6 +1,7 @@
 package gozer.services;
 
 import gozer.GozerFactory;
+import gozer.api.Cloner;
 import gozer.model.Project;
 import org.eclipse.jgit.api.Git;
 import org.eclipse.jgit.api.errors.GitAPIException;
@@ -13,7 +14,7 @@ import javax.inject.Named;
 import java.io.File;
 
 @Component
-public class GitService {
+public class GitService implements Cloner {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GitService.class);
     private String globalRepoPath;
@@ -22,7 +23,8 @@ public class GitService {
         this.globalRepoPath = globalRepoPath;
     }
 
-    public Project cloneRepository(Project project) {
+    @Override
+    public Project clone(Project project) {
 
         String localPath = globalRepoPath + "/" + project.getName();
         LOGGER.debug("local path of the cloned repository : [{}]", localPath);
@@ -54,4 +56,8 @@ public class GitService {
         return project;
     }
 
+    @Override
+    public Project.Status getTo() {
+        return Project.Status.CLONED;
+    }
 }

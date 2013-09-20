@@ -15,8 +15,6 @@ import restx.security.PermitAll;
 
 import java.util.Collection;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 @Component
 @RestxResource
 public class ProjectResource {
@@ -64,11 +62,10 @@ public class ProjectResource {
     @PermitAll
     @PUT("/projects/{projectName}/resolve")
     public Project resolve(String projectName) {
-
-        checkNotNull(projectName); // TODO ça ne peut pas arriver
         Project project = projectRepository.findByName(projectName);
         if (project == null) {
-            return null;
+            LOGGER.warn("Project {} is unknown", projectName);
+            throw new UnknownProjectException(projectName);
         }
 
         LOGGER.debug("Try to resolve the project {}", project.getName());
@@ -84,10 +81,10 @@ public class ProjectResource {
     @PUT("/projects/{projectName}/deploy")
     public Project deploy(String projectName) {
 
-        checkNotNull(projectName);
         Project project = projectRepository.findByName(projectName);
         if (project == null) {
-            return null;
+            LOGGER.warn("Project {} is unknown", projectName);
+            throw new UnknownProjectException(projectName);
         }
 
         project = deploiementService.deploy(project);
@@ -100,7 +97,8 @@ public class ProjectResource {
     public Project clone(String projectName) {
         Project project = projectRepository.findByName(projectName);
         if (project == null) {
-            return null;
+            LOGGER.warn("Project {} is unknown", projectName);
+            throw new UnknownProjectException(projectName);
         }
         LOGGER.debug("Try to clone the project {}", project.getName());
 

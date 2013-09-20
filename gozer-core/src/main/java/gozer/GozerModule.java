@@ -28,4 +28,5 @@ public class GozerModule {
     public String compilationDestination() {
         return System.getProperty("compilation.destination", "target/tmp/classes");
     }
+
 }

@@ -21,7 +21,7 @@ public class GitServiceTest {
                 .build();
 
         GitService gitService = new GitService("target/git");
-        Project returnedProject = gitService.cloneRepository(project);
+        Project returnedProject = gitService.clone(project);
 
         assertThat(new File("target/git/spring-pet-clinic")).exists();
         assertThat(returnedProject).isNotNull();

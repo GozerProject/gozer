@@ -1,6 +1,7 @@
 package gozer.services;
 
 import gozer.GozerFactory;
+import gozer.api.Deployer;
 import gozer.model.Dependency;
 import gozer.model.Project;
 import org.eclipse.jetty.server.Server;
@@ -18,7 +19,7 @@ import static gozer.model.builders.DependencyBuilder.aDependency;
 
 
 @Component
-public class DeploiementService {
+public class DeploiementService implements Deployer {
 
 
     // TODO put everything into injected configuration
@@ -41,8 +42,9 @@ public class DeploiementService {
         this.lifecycleService = lifecycleService;
     }
 
+    @Override
     public Project deploy(Project project) {
-        project = lifecycleService.cycleUpTo(project, Project.Status.RESOLVED);
+        project = lifecycleService.cycleUpTo(project, Project.Status.COMPILED);
 
         String WEB_INF_LOCATION = globalRepoPath +"/"+ project.getName()+ "/" + WEB_XML_STANDARD_LOCATION;
         String WEB_APP_LOCATION = globalRepoPath +"/"+ project.getName()+ "/" + WEBAPP_STANDARD_LOCATION;
@@ -93,4 +95,8 @@ public class DeploiementService {
         return kclScope1;
     }
 
+    @Override
+    public Project.Status getTo() {
+        return Project.Status.DEPLOYED;
+    }
 }

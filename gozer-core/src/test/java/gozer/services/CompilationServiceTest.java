@@ -38,7 +38,7 @@ public class CompilationServiceTest {
 
     @Test
     public void should_build() throws Exception {
-        CompilationService compilationManager = new CompilationService("/target/tmp/classes");
+        CompilationService compilationManager = new CompilationService("/target/tmp/classes", null);
 
         assertThat(compilationManager.getClassFile("org.gozer.SimpleClass").isPresent()).isFalse();
 
