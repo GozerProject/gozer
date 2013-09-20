@@ -27,18 +27,23 @@ public class DeploiementService {
     private static final String WEBAPP_STANDARD_LOCATION = "src/main/webapp";
     private static final int DEFAULT_PORT = 8085;
     private final DependenciesService dependenciesService;
+    private final LifecycleService lifecycleService;
     private String classesPath;
     private String globalRepoPath;
 
     public DeploiementService(@Named(GozerFactory.GLOBAL_REPO_PATH) String globalRepoPath,
                               @Named(GozerFactory.COMPILATION_DESTINATION) String classesPath,
-                              DependenciesService dependenciesService) {
+                              DependenciesService dependenciesService,
+                              LifecycleService lifecycleService) {
         this.globalRepoPath = globalRepoPath;
         this.classesPath = classesPath;
         this.dependenciesService = dependenciesService;
+        this.lifecycleService = lifecycleService;
     }
 
     public Project deploy(Project project) {
+        project = lifecycleService.cycleUpTo(project, Project.Status.RESOLVED);
+
         String WEB_INF_LOCATION = globalRepoPath +"/"+ project.getName()+ "/" + WEB_XML_STANDARD_LOCATION;
         String WEB_APP_LOCATION = globalRepoPath +"/"+ project.getName()+ "/" + WEBAPP_STANDARD_LOCATION;
 
@@ -77,9 +82,9 @@ public class DeploiementService {
 
     private KevoreeJarClassLoader addJettyDependencies(KevoreeJarClassLoader kclScope1) throws MalformedURLException {
         Dependency dependency = aDependency().withGroupId("org.eclipse.jetty")
-                                        .withArtifactId("jetty-servlet")
-                                        .withVersion("8.1.13.v20130916")
-                                        .build();
+                .withArtifactId("jetty-servlet")
+                .withVersion("8.1.13.v20130916")
+                .build();
         File dependencyFile = dependenciesService.resolve(dependency);
         KevoreeJarClassLoader kclScope = new KevoreeJarClassLoader();
         kclScope.addJarFromURL(dependencyFile.toURI().toURL());

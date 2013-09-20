@@ -16,8 +16,15 @@ import static com.google.common.collect.Sets.newHashSet;
 
 public class Project implements Serializable {
     public enum Status {
-        CREATED, DEPLOYED, CLONED, COMPILED, RESOLVED;
+        CREATED,
+        CLONED,
+        RESOLVED,
+        COMPILED,
+        DEPLOYED;
 
+        public boolean isLowerThan(Status status) {
+            return this.compareTo(status) < 0;
+        }
     }
 
     private Long id;
